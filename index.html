@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Country</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcf8f2;
+            background-image: 
+                radial-gradient(#e6ccb2 1px, transparent 1px),
+                radial-gradient(#e6ccb2 1px, #fcf8f2 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            color: #4a3319;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.08;
+            font-size: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+            overflow: hidden;
+        }
+
+        /* --- ÉCRAN ACCUEIL --- */
+        #section-accueil {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid #d4a373;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #b05721;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .bulle-sous-titre {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #5c4033;
+            background: rgba(212, 163, 115, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #b05721;
+        }
+        .btn-groupe-accueil {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+        .btn-commencer {
+            background-color: #d97706;
+            color: white;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 250px;
+        }
+        .btn-commencer:hover {
+            background-color: #b45309;
+            transform: translateY(-2px);
+        }
+        .btn-credits-ouvrir {
+            background-color: #d97706;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 250px;
+        }
+        .btn-credits-ouvrir:hover {
+            background-color: #b45309;
+            transform: translateY(-2px);
+        }
+
+        /* --- MODAL CRÉDITS --- */
+        #modal-credits {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .credits-contenu {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid #d4a373;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            color: #4a3319;
+            text-align: left;
+        }
+        .credits-contenu h3 {
+            color: #b05721;
+            margin-top: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .credits-contenu p {
+            margin: 10px 0;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+        .credits-contenu a {
+            color: #d97706;
+            word-break: break-all;
+        }
+        .btn-fermer-credits {
+            display: block;
+            margin: 20px auto 0 auto;
+            background-color: #d97706;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-fermer-credits:hover {
+            background-color: #b45309;
+        }
+
+        /* --- ÉCRAN CHOIX DES NIVEAUX --- */
+        #section-niveaux {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+        }
+        #section-niveaux h2 {
+            color: #b05721;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+        .menu-niveaux {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn-niveau {
+            background-color: #fff;
+            color: #4a3319;
+            border: 2px solid #d4a373;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .btn-niveau:hover {
+            background-color: #d97706;
+            color: white;
+            border-color: #b45309;
+            transform: translateY(-3px);
+        }
+
+        /* --- ÉCRAN LISTE DES DANSES --- */
+        #section-danses {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+        #section-danses h2 {
+            color: #b05721;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+        }
+        .grid-danses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+        .btn-danse {
+            background-color: #fff;
+            color: #4a3319;
+            border: 2px solid #d4a373;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .btn-danse:hover {
+            background-color: #d97706;
+            color: white;
+            border-color: #b45309;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .btn-retour-niveaux {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: transparent;
+            color: #b05721;
+            border: 2px solid #b05721;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-retour-niveaux:hover {
+            background-color: rgba(176, 87, 33, 0.1);
+        }
+
+        /* --- ÉCRAN DÉTAIL D'UNE DANSE (Danse en ligne & Musique) --- */
+        #section-detail-danse {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid #d4a373;
+        }
+        #titre-danse-selectionnee {
+            color: #b05721;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+        .menu-options-danse {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn-option-danse {
+            background-color: #fff;
+            color: #4a3319;
+            border: 2px solid #d4a373;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-decoration: none;
+            display: block;
+        }
+        .btn-option-danse:hover {
+            background-color: #d97706;
+            color: white;
+            border-color: #b45309;
+            transform: translateY(-3px);
+        }
+        .btn-retour-danses {
+            display: inline-block;
+            margin-top: 25px;
+            background-color: transparent;
+            color: #b05721;
+            border: 2px solid #b05721;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-retour-danses:hover {
+            background-color: rgba(176, 87, 33, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Motif d'arrière-plan avec bottes de cowboy et chapeaux -->
+    <div class="pattern-bg">
+        👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 
+        🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 
+        🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 
+    </div>
+
+    <!-- 1. Écran d'accueil -->
+    <div id="section-accueil">
+        <h1>Bienvenue</h1>
+        <div class="bulle-sous-titre">
+            Bienvenue dans le recueil de danse country
+        </div>
+        <div class="btn-groupe-accueil">
+            <button class="btn-commencer" onclick="allerAuxNiveaux()">Commencer</button>
+            <button class="btn-credits-ouvrir" onclick="ouvrirCredits()">Crédits</button>
+        </div>
+    </div>
+
+    <!-- Fenêtre modale des Crédits -->
+    <div id="modal-credits">
+        <div class="credits-contenu">
+            <h3>Crédits</h3>
+            <p><strong>Créateur officiel :</strong> Jaycob Servant</p>
+            <p><strong>Co-créateur officiel :</strong> Sarah Thibodeau</p>
+            <p><strong>Danse en ligne :</strong> Mg Danse Country-pop Mathieu Gagné</p>
+            <p><a href="https://youtube.com/@mgdansecountrypop?si=jDQfKF09Tvdv3VmW" target="_blank">Chaîne YouTube</a></p>
+            <p><strong>Et :</strong> Sarah Thibodeau</p>
+            <button class="btn-fermer-credits" onclick="fermerCredits()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- 2. Écran de choix du niveau -->
+    <div id="section-niveaux">
+        <h2>Choisis ton niveau</h2>
+        <div class="menu-niveaux">
+            <button class="btn-niveau" onclick="filtrerNiveau('Novice')">Novice</button>
+            <button class="btn-niveau" onclick="filtrerNiveau('Débutant')">Débutant</button>
+            <button class="btn-niveau" onclick="filtrerNiveau('Intermédiaire')">Intermédiaire</button>
+            <button class="btn-niveau" onclick="filtrerNiveau('Autre')">Autre</button>
+        </div>
+        <div>
+            <button class="btn-retour-niveaux" onclick="retourAccueil()">&larr; Retour à l'accueil</button>
+        </div>
+    </div>
+
+    <!-- 3. Écran avec la liste des danses -->
+    <div id="section-danses">
+        <h2>VOILÀ LES DANSES COUNTRY DISPONIBLES POUR L'INSTANT</h2>
+        <div class="grid-danses" id="grille-liste-danses">
+            <!-- Les boutons des danses s'afficheront ici selon le niveau -->
+        </div>
+        <div>
+            <button class="btn-retour-niveaux" onclick="retourNiveaux()">&larr; Changer de niveau</button>
+        </div>
+    </div>
+
+    <!-- 4. Écran de détail d'une danse (Danse en ligne / Musique) -->
+    <div id="section-detail-danse">
+        <h2 id="titre-danse-selectionnee">Nom de la danse</h2>
+        <div class="menu-options-danse">
+            <a id="lien-danse-ligne" href="#" target="_blank" class="btn-option-danse">DANSE EN LIGNE</a>
+            <a id="lien-musique" href="#" target="_blank" class="btn-option-danse">MUSIQUE</a>
+        </div>
+        <div>
+            <button class="btn-retour-danses" onclick="retourDanses()">&larr; Retour aux danses</button>
+        </div>
+    </div>
+
+    <script>
+        // Base de données complète de toutes les danses et leurs liens
+        const dansesData = {
+            "Novice": [
+                {
+                    nom: "The Wolf",
+                    danseLigne: "https://youtu.be/XP1Ge5k6sBI?si=dYsSwVgCiqgt48e5",
+                    musique: "https://youtu.be/-w7_tQd0pL8?si=2ls8qpaqFHnff_5E"
+                }
+            ],
+            "Débutant": [
+                {
+                    nom: "Hoedown",
+                    danseLigne: "https://youtu.be/zCxkvuL7L04?si=NJJv55frp01MO9WF",
+                    musique: "https://youtu.be/5MCqzkus1xU?si=bgcIwSd6SKUAp_tK"
+                },
+                {
+                    nom: "Austin",
+                    danseLigne: "https://youtu.be/dDahjdG-MJw?si=54iCycjg0nzk79Nc",
+                    musique: "https://youtu.be/FyjnbSsZ2tc?si=5P_CAMNO2OcQVNjY"
+                },
+                {
+                    nom: "Glass of Wine",
+                    danseLigne: "https://youtu.be/EBTaqY2yrU8?si=7CFG7WyAzGdd0dKi",
+                    musique: "https://youtu.be/eEEYERfWDqg?si=qgl4dcNO10Zoprg-"
+                },
+                {
+                    nom: "High Horse",
+                    danseLigne: "https://youtu.be/j0h5ocHpORI?si=xVbL2SGSddU9Jc4L",
+                    musique: "https://youtu.be/2LLJGMTHbDs?si=LamCDK4lA24H3tNg"
+                },
+                {
+                    nom: "Burn It to the Ground",
+                    danseLigne: "https://youtu.be/CZWPs9BnJIw?si=Yy-e99mAxXPTKZ86",
+                    musique: "https://youtu.be/gUxH1zN0yOc?si=2lf1f0Y2fjtyLnR6"
+                },
+                {
+                    nom: "Footloose",
+                    danseLigne: "https://youtu.be/miZJe008SuI?si=Hce79ePsnWhJJE6p",
+                    musique: "https://youtu.be/FDMHZFJnk2s?si=Uc7N21pzbWoP98CW"
+                },
+                {
+                    nom: "Soldier",
+                    danseLigne: "https://youtu.be/KX7FropHUcg?si=60U9PgBNd2u99LVZ",
+                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV"
+                },
+                {
+                    nom: "Back to the Start",
+                    danseLigne: "https://youtu.be/XvDqAgyW-Jg?si=olfj6mAt31cEU5EG",
+                    musique: "https://youtu.be/SF8OalDtKnQ?si=-2dllMqAi-eEJY01"
+                },
+                {
+                    nom: "Cowboy Boogie",
+                    danseLigne: "https://youtu.be/_WX112-pgWE?si=ypZNx2BcSJ0a1WYo",
+                    musique: "https://youtu.be/bFrYS28IV-E?si=L8YGzfSaQFlvU3ZA"
+                },
+                {
+                    nom: "Good Time",
+                    danseLigne: "https://youtu.be/KePwvAXTomg?si=_1p7mIIyv0DBSBIb",
+                    musique: "https://youtu.be/OYKmqErgHq8?si=jOHZ8EWUH3gqupWi"
+                }
+            ],
+            "Intermédiaire": [
+                {
+                    nom: "Banjo",
+                    danseLigne: "https://youtu.be/s8wiPMWChYk?si=DnYwqKM2ssGJuY2P",
+                    musique: "https://youtu.be/g8q1k1G5OiM?si=Op-ogZcOOrNNCaJ2"
+                },
+                {
+                    nom: "Bloodline",
+                    danseLigne: "https://youtu.be/W3LNvgZhpLM?si=3HXJ3Kbh-nAJt8xS",
+                    musique: "https://youtu.be/UBtfcphWKBY?si=sOlcmQWWFPVT-HuM"
+                },
+                {
+                    nom: "I See Country",
+                    danseLigne: "https://youtu.be/ZvmNqiuDsfE?si=dIDYdggLi5GyP0y4",
+                    musique: "https://youtu.be/c6Ol1CrD8Rs?si=kAoxaGuk3IFtTBsK"
+                },
+                {
+                    nom: "Where I Belong",
+                    danseLigne: "https://youtu.be/pX_AM-fLfS0?si=02O_-8nUSm-2v-fd",
+                    musique: "https://youtu.be/pJcR0A0Ezik?si=bZpUb8RwnZT-IiuW"
+                },
+                {
+                    nom: "Burn It to the Ground",
+                    danseLigne: "https://youtu.be/CZWPs9BnJIw?si=Yy-e99mAxXPTKZ86",
+                    musique: "https://youtu.be/gUxH1zN0yOc?si=2lf1f0Y2fjtyLnR6"
+                },
+                {
+                    nom: "Footloose",
+                    danseLigne: "https://youtu.be/miZJe008SuI?si=Hce79ePsnWhJJE6p",
+                    musique: "https://youtu.be/FDMHZFJnk2s?si=Uc7N21pzbWoP98CW"
+                },
+                {
+                    nom: "Soldier",
+                    danseLigne: "https://youtu.be/KX7FropHUcg?si=60U9PgBNd2u99LVZ",
+                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV"
+                }
+            ],
+            "Autre": [
+                {
+                    nom: "This Is It",
+                    danseLigne: "https://youtu.be/VVIY15sx6m4?si=ic2n0EuvSfEct3e8",
+                    musique: "https://youtu.be/LENuIoz_zfM?si=ZiqoDBNeKCWYRYIS"
+                }
+            ]
+        };
+
+        function ouvrirCredits() {
+            document.getElementById('modal-credits').style.display = 'flex';
+        }
+
+        function fermerCredits() {
+            document.getElementById('modal-credits').style.display = 'none';
+        }
+
+        function allerAuxNiveaux() {
+            document.getElementById('section-accueil').style.display = 'none';
+            document.getElementById('section-niveaux').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        }
+
+        function retourAccueil() {
+            document.getElementById('section-niveaux').style.display = 'none';
+            document.getElementById('section-accueil').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        }
+
+        function filtrerNiveau(niveau) {
+            document.getElementById('section-niveaux').style.display = 'none';
+            document.getElementById('section-danses').style.display = 'block';
+            document.body.style.justifyContent = 'flex-start';
+
+            const grille = document.getElementById('grille-liste-danses');
+            grille.innerHTML = '';
+
+            const liste = dansesData[niveau];
+            if (!liste || liste.length === 0) {
+                grille.innerHTML = '<p style="grid-column: 1 / -1; color: #78350f; font-weight: bold;">Aucune danse disponible pour l\'instant dans ce niveau.</p>';
+                return;
+            }
+
+            liste.forEach(danse => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-danse';
+                btn.innerText = danse.nom;
+                btn.onclick = () => selectionnerDanse(danse);
+                grille.appendChild(btn);
+            });
+        }
+
+        function retourNiveaux() {
+            document.getElementById('section-danses').style.display = 'none';
+            document.getElementById('section-niveaux').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        }
+
+        function selectionnerDanse(danseObj) {
+            document.getElementById('titre-danse-selectionnee').innerText = danseObj.nom;
+            document.getElementById('lien-danse-ligne').href = danseObj.danseLigne;
+            document.getElementById('lien-musique').href = danseObj.musique;
+
+            document.getElementById('section-danses').style.display = 'none';
+            document.getElementById('section-detail-danse').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        }
+
+        function retourDanses() {
+            document.getElementById('section-detail-danse').style.display = 'none';
+            document.getElementById('section-danses').style.display = 'block';
+            document.body.style.justifyContent = 'flex-start';
+        }
+    </script>
+
+</body>
+</html>
