@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Country</title>
     <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
         body {
             margin: 0;
             padding: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #fcf8f2;
-            background-image: 
-                radial-gradient(#e6ccb2 1px, transparent 1px),
-                radial-gradient(#e6ccb2 1px, #fcf8f2 1px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
             color: #4a3319;
             min-height: 100vh;
             display: flex;
@@ -22,6 +21,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow-x: hidden;
         }
 
         .pattern-bg {
@@ -33,7 +33,7 @@
             pointer-events: none;
             z-index: -1;
             opacity: 0.08;
-            font-size: 2rem;
+            font-size: 1.8rem;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -45,21 +45,22 @@
         #section-accueil {
             text-align: center;
             max-width: 600px;
+            width: 100%;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
             border: 2px solid #d4a373;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin-bottom: 10px;
             color: #b05721;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         .bulle-sous-titre {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 30px;
             color: #5c4033;
             background: rgba(212, 163, 115, 0.2);
@@ -72,42 +73,24 @@
             flex-direction: column;
             gap: 12px;
             align-items: center;
+            width: 100%;
         }
-        .btn-commencer {
+        .btn-commencer, .btn-credits-ouvrir {
             background-color: #d97706;
             color: white;
-            padding: 12px 35px;
+            padding: 14px 35px;
             font-size: 1.1rem;
             font-weight: bold;
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 250px;
-        }
-        .btn-commencer:hover {
-            background-color: #b45309;
-            transform: translateY(-2px);
-        }
-        .btn-credits-ouvrir {
-            background-color: #d97706;
-            color: white;
-            border: none;
-            padding: 12px 35px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 250px;
         }
-        .btn-credits-ouvrir:hover {
+        .btn-commencer:active, .btn-credits-ouvrir:active {
             background-color: #b45309;
-            transform: translateY(-2px);
+            transform: scale(0.98);
         }
 
         /* --- MODAL CRÉDITS --- */
@@ -122,13 +105,14 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
+            padding: 15px;
         }
         .credits-contenu {
             background: #fff;
             padding: 30px;
             border-radius: 12px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             border: 2px solid #d4a373;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             color: #4a3319;
@@ -143,7 +127,6 @@
         .credits-contenu p {
             margin: 10px 0;
             line-height: 1.5;
-            white-space: nowrap;
         }
         .credits-contenu a {
             color: #d97706;
@@ -155,13 +138,10 @@
             background-color: #d97706;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 20px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-        }
-        .btn-fermer-credits:hover {
-            background-color: #b45309;
         }
 
         /* --- ÉCRAN CHOIX DES NIVEAUX --- */
@@ -169,12 +149,13 @@
             display: none;
             text-align: center;
             max-width: 600px;
+            width: 100%;
             padding: 40px;
         }
         #section-niveaux h2 {
             color: #b05721;
             margin-bottom: 30px;
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-transform: uppercase;
         }
         .menu-niveaux {
@@ -191,14 +172,11 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .btn-niveau:hover {
+        .btn-niveau:active {
             background-color: #d97706;
             color: white;
-            border-color: #b45309;
-            transform: translateY(-3px);
         }
 
         /* --- ÉCRAN LISTE DES DANSES --- */
@@ -213,7 +191,8 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 30px;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
+            padding: 0 10px;
         }
         .grid-danses {
             display: grid;
@@ -231,15 +210,11 @@
             text-align: center;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .btn-danse:hover {
+        .btn-danse:active {
             background-color: #d97706;
             color: white;
-            border-color: #b45309;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         .btn-retour-niveaux {
             display: inline-block;
@@ -251,19 +226,16 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s;
-        }
-        .btn-retour-niveaux:hover {
-            background-color: rgba(176, 87, 33, 0.1);
         }
 
-        /* --- ÉCRAN DÉTAIL D'UNE DANSE (Danse en ligne & Musique) --- */
+        /* --- ÉCRAN DÉTAIL D'UNE DANSE --- */
         #section-detail-danse {
             display: none;
             text-align: center;
             max-width: 600px;
+            width: 100%;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
             border: 2px solid #d4a373;
@@ -271,7 +243,7 @@
         #titre-danse-selectionnee {
             color: #b05721;
             margin-bottom: 30px;
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-transform: uppercase;
         }
         .menu-options-danse {
@@ -288,16 +260,13 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             text-decoration: none;
             display: block;
         }
-        .btn-option-danse:hover {
+        .btn-option-danse:active {
             background-color: #d97706;
             color: white;
-            border-color: #b45309;
-            transform: translateY(-3px);
         }
         .btn-retour-danses {
             display: inline-block;
@@ -309,16 +278,11 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s;
-        }
-        .btn-retour-danses:hover {
-            background-color: rgba(176, 87, 33, 0.1);
         }
     </style>
 </head>
 <body>
 
-    <!-- Motif d'arrière-plan avec bottes de cowboy et chapeaux -->
     <div class="pattern-bg">
         👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 
         🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 
@@ -332,8 +296,8 @@
             Bienvenue dans le recueil de danse country
         </div>
         <div class="btn-groupe-accueil">
-            <button class="btn-commencer" onclick="allerAuxNiveaux()">Commencer</button>
-            <button class="btn-credits-ouvrir" onclick="ouvrirCredits()">Crédits</button>
+            <button class="btn-commencer" id="btn-commencer">Commencer</button>
+            <button class="btn-credits-ouvrir" id="btn-credits">Crédits</button>
         </div>
     </div>
 
@@ -342,11 +306,11 @@
         <div class="credits-contenu">
             <h3>Crédits</h3>
             <p><strong>Créateur officiel :</strong> Jaycob Servant</p>
-            <p><strong>Co-créateur officiel :</strong> Sarah Thibodeau</p>
+            <p><strong>Co-créateur officiel :</strong> Sarah</p>
             <p><strong>Danse en ligne :</strong> Mg Danse Country-pop Mathieu Gagné</p>
             <p><a href="https://youtube.com/@mgdansecountrypop?si=jDQfKF09Tvdv3VmW" target="_blank">Chaîne YouTube</a></p>
-            <p><strong>Et :</strong> Sarah Thibodeau</p>
-            <button class="btn-fermer-credits" onclick="fermerCredits()">Fermer</button>
+            <p><strong>Et :</strong> Sarah</p>
+            <button class="btn-fermer-credits" id="btn-fermer-credits">Fermer</button>
         </div>
     </div>
 
@@ -354,28 +318,26 @@
     <div id="section-niveaux">
         <h2>Choisis ton niveau</h2>
         <div class="menu-niveaux">
-            <button class="btn-niveau" onclick="filtrerNiveau('Novice')">Novice</button>
-            <button class="btn-niveau" onclick="filtrerNiveau('Débutant')">Débutant</button>
-            <button class="btn-niveau" onclick="filtrerNiveau('Intermédiaire')">Intermédiaire</button>
-            <button class="btn-niveau" onclick="filtrerNiveau('Autre')">Autre</button>
+            <button class="btn-niveau" data-niveau="Novice">Novice</button>
+            <button class="btn-niveau" data-niveau="Débutant">Débutant</button>
+            <button class="btn-niveau" data-niveau="Intermédiaire">Intermédiaire</button>
+            <button class="btn-niveau" data-niveau="Autre">Autre</button>
         </div>
         <div>
-            <button class="btn-retour-niveaux" onclick="retourAccueil()">&larr; Retour à l'accueil</button>
+            <button class="btn-retour-niveaux" id="btn-retour-accueil">&larr; Retour à l'accueil</button>
         </div>
     </div>
 
     <!-- 3. Écran avec la liste des danses -->
     <div id="section-danses">
         <h2>VOILÀ LES DANSES COUNTRY DISPONIBLES POUR L'INSTANT</h2>
-        <div class="grid-danses" id="grille-liste-danses">
-            <!-- Les boutons des danses s'afficheront ici selon le niveau -->
-        </div>
+        <div class="grid-danses" id="grille-liste-danses"></div>
         <div>
-            <button class="btn-retour-niveaux" onclick="retourNiveaux()">&larr; Changer de niveau</button>
+            <button class="btn-retour-niveaux" id="btn-retour-niveaux">&larr; Changer de niveau</button>
         </div>
     </div>
 
-    <!-- 4. Écran de détail d'une danse (Danse en ligne / Musique) -->
+    <!-- 4. Écran de détail d'une danse -->
     <div id="section-detail-danse">
         <h2 id="titre-danse-selectionnee">Nom de la danse</h2>
         <div class="menu-options-danse">
@@ -383,18 +345,22 @@
             <a id="lien-musique" href="#" target="_blank" class="btn-option-danse">MUSIQUE</a>
         </div>
         <div>
-            <button class="btn-retour-danses" onclick="retourDanses()">&larr; Retour aux danses</button>
+            <button class="btn-retour-danses" id="btn-retour-danses">&larr; Retour aux danses</button>
         </div>
     </div>
 
     <script>
-        // Base de données complète de toutes les danses et leurs liens
         const dansesData = {
             "Novice": [
                 {
                     nom: "The Wolf",
                     danseLigne: "https://youtu.be/XP1Ge5k6sBI?si=dYsSwVgCiqgt48e5",
                     musique: "https://youtu.be/-w7_tQd0pL8?si=2ls8qpaqFHnff_5E"
+                },
+                {
+                    nom: "One more",
+                    danseLigne: "https://youtu.be/WnlNitg_EaY?si=FsqpBBg-SCKfHpBQ",
+                    musique: "https://youtu.be/TAKg5ySinGI?si=-XzTfqDma_C-OLse"
                 }
             ],
             "Débutant": [
@@ -456,6 +422,11 @@
                     musique: "https://youtu.be/g8q1k1G5OiM?si=Op-ogZcOOrNNCaJ2"
                 },
                 {
+                    nom: "Oh love",
+                    danseLigne: "https://youtu.be/thcjtQXca_o?si=zkJXHIf5nYfybmc9",
+                    musique: "https://youtu.be/Qai6lm1BuR8?si=Xkt-HJidu1S7axI5"
+                },
+                {
                     nom: "Bloodline",
                     danseLigne: "https://youtu.be/W3LNvgZhpLM?si=3HXJ3Kbh-nAJt8xS",
                     musique: "https://youtu.be/UBtfcphWKBY?si=sOlcmQWWFPVT-HuM"
@@ -491,29 +462,54 @@
                     nom: "This Is It",
                     danseLigne: "https://youtu.be/VVIY15sx6m4?si=ic2n0EuvSfEct3e8",
                     musique: "https://youtu.be/LENuIoz_zfM?si=ZiqoDBNeKCWYRYIS"
+                },
+                {
+                    nom: "Kingdom of Fear",
+                    danseLigne: "https://youtu.be/TbD6LEvJla8?si=4vuHjPbM9fiCcd-9",
+                    musique: "https://youtu.be/63k0kNuCPak?si=ACG19r8boOrogO5q"
                 }
             ]
         };
 
-        function ouvrirCredits() {
-            document.getElementById('modal-credits').style.display = 'flex';
-        }
-
-        function fermerCredits() {
-            document.getElementById('modal-credits').style.display = 'none';
-        }
-
-        function allerAuxNiveaux() {
+        document.getElementById('btn-commencer').addEventListener('click', function() {
             document.getElementById('section-accueil').style.display = 'none';
             document.getElementById('section-niveaux').style.display = 'block';
             document.body.style.justifyContent = 'center';
-        }
+        });
 
-        function retourAccueil() {
+        document.getElementById('btn-credits').addEventListener('click', function() {
+            document.getElementById('modal-credits').style.display = 'flex';
+        });
+
+        document.getElementById('btn-fermer-credits').addEventListener('click', function() {
+            document.getElementById('modal-credits').style.display = 'none';
+        });
+
+        document.getElementById('btn-retour-accueil').addEventListener('click', function() {
             document.getElementById('section-niveaux').style.display = 'none';
             document.getElementById('section-accueil').style.display = 'block';
             document.body.style.justifyContent = 'center';
-        }
+        });
+
+        document.getElementById('btn-retour-niveaux').addEventListener('click', function() {
+            document.getElementById('section-danses').style.display = 'none';
+            document.getElementById('section-niveaux').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        });
+
+        document.getElementById('btn-retour-danses').addEventListener('click', function() {
+            document.getElementById('section-detail-danse').style.display = 'none';
+            document.getElementById('section-danses').style.display = 'block';
+            document.body.style.justifyContent = 'flex-start';
+        });
+
+        const boutonsNiveaux = document.querySelectorAll('.btn-niveau');
+        boutonsNiveaux.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const niveau = this.getAttribute('data-niveau');
+                filtrerNiveau(niveau);
+            });
+        });
 
         function filtrerNiveau(niveau) {
             document.getElementById('section-niveaux').style.display = 'none';
@@ -525,7 +521,7 @@
 
             const liste = dansesData[niveau];
             if (!liste || liste.length === 0) {
-                grille.innerHTML = '<p style="grid-column: 1 / -1; color: #78350f; font-weight: bold;">Aucune danse disponible pour l\'instant dans ce niveau.</p>';
+                grille.innerHTML = '<p style="grid-column: 1 / -1; color: #78350f; font-weight: bold;">Aucune danse disponible pour l\'instant.</p>';
                 return;
             }
 
@@ -533,7 +529,9 @@
                 const btn = document.createElement('button');
                 btn.className = 'btn-danse';
                 btn.innerText = danse.nom;
-                btn.onclick = () => selectionnerDanse(danse);
+                btn.addEventListener('click', function() {
+                    selectionnerDanse(danse);
+                });
                 grille.appendChild(btn);
             });
         }
@@ -552,12 +550,6 @@
             document.getElementById('section-danses').style.display = 'none';
             document.getElementById('section-detail-danse').style.display = 'block';
             document.body.style.justifyContent = 'center';
-        }
-
-        function retourDanses() {
-            document.getElementById('section-detail-danse').style.display = 'none';
-            document.getElementById('section-danses').style.display = 'block';
-            document.body.style.justifyContent = 'flex-start';
         }
     </script>
 
