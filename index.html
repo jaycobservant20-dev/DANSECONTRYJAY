@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Country</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Site Country - Recueil</title>
     <style>
         * {
             box-sizing: border-box;
@@ -41,6 +44,31 @@
             overflow: hidden;
         }
 
+        /* Bande défilante en haut */
+        .bande-defilante {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #d97706;
+            color: white;
+            font-weight: bold;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .bande-defilante span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: defilement 15s linear infinite;
+        }
+        @keyframes defilement {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
         /* --- ÉCRAN ACCUEIL --- */
         #section-accueil {
             text-align: center;
@@ -51,6 +79,7 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
             border: 2px solid #d4a373;
+            margin-top: 30px;
         }
         h1 {
             font-size: 2.8rem;
@@ -151,6 +180,7 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
+            margin-top: 30px;
         }
         #section-niveaux h2 {
             color: #b05721;
@@ -185,6 +215,7 @@
             width: 100%;
             max-width: 1000px;
             text-align: center;
+            margin-top: 30px;
         }
         #section-danses h2 {
             color: #b05721;
@@ -200,6 +231,24 @@
             gap: 20px;
             padding: 10px;
         }
+        .conteneur-element-danse {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .badge-createur {
+            background-color: #d97706;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: -2px;
+            display: inline-block;
+            align-self: center;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
         .btn-danse {
             background-color: #fff;
             color: #4a3319;
@@ -211,6 +260,7 @@
             border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            width: 100%;
         }
         .btn-danse:active {
             background-color: #d97706;
@@ -239,6 +289,7 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
             border: 2px solid #d4a373;
+            margin-top: 30px;
         }
         #titre-danse-selectionnee {
             color: #b05721;
@@ -283,6 +334,11 @@
 </head>
 <body>
 
+    <!-- Bande défilante orange en haut -->
+    <div class="bande-defilante">
+        <span>EN COLLABORATION AVEC SARAH</span>
+    </div>
+
     <div class="pattern-bg">
         👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 
         🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 
@@ -306,10 +362,9 @@
         <div class="credits-contenu">
             <h3>Crédits</h3>
             <p><strong>Créateur officiel :</strong> Jaycob Servant</p>
-            <p><strong>Co-créateur officiel :</strong> Sarah</p>
+            <p><strong>Co-Créateur officiel :</strong> Sarah</p>
             <p><strong>Danse en ligne :</strong> Mg Danse Country-pop Mathieu Gagné</p>
             <p><a href="https://youtube.com/@mgdansecountrypop?si=jDQfKF09Tvdv3VmW" target="_blank">Chaîne YouTube</a></p>
-            <p><strong>Et :</strong> Sarah</p>
             <button class="btn-fermer-credits" id="btn-fermer-credits">Fermer</button>
         </div>
     </div>
@@ -361,6 +416,11 @@
                     nom: "One more",
                     danseLigne: "https://youtu.be/WnlNitg_EaY?si=FsqpBBg-SCKfHpBQ",
                     musique: "https://youtu.be/TAKg5ySinGI?si=-XzTfqDma_C-OLse"
+                },
+                {
+                    nom: "Hit The 4",
+                    danseLigne: "https://youtu.be/Z5NeurNFT-s?si=cIrHVu4umKYOE7sQ",
+                    musique: "https://youtu.be/tXVaLWR2M8k?si=F8boJ_qCaR4pi1sM"
                 }
             ],
             "Débutant": [
@@ -385,6 +445,11 @@
                     musique: "https://youtu.be/2LLJGMTHbDs?si=LamCDK4lA24H3tNg"
                 },
                 {
+                    nom: "Damn",
+                    danseLigne: "https://youtu.be/Zyw7ANkDyGc?si=_egw6wda3sR31K-i",
+                    musique: "https://youtu.be/22cPDBuhYYg?si=4LPPsf5b7SzTFeAA"
+                },
+                {
                     nom: "Burn It to the Ground",
                     danseLigne: "https://youtu.be/CZWPs9BnJIw?si=Yy-e99mAxXPTKZ86",
                     musique: "https://youtu.be/gUxH1zN0yOc?si=2lf1f0Y2fjtyLnR6"
@@ -397,7 +462,8 @@
                 {
                     nom: "Soldier",
                     danseLigne: "https://youtu.be/KX7FropHUcg?si=60U9PgBNd2u99LVZ",
-                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV"
+                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV",
+                    specials: ["👑 Choix de la Co-Créatrice", "Choix 2 de l'équipe"]
                 },
                 {
                     nom: "Back to the Start",
@@ -419,7 +485,8 @@
                 {
                     nom: "Banjo",
                     danseLigne: "https://youtu.be/s8wiPMWChYk?si=DnYwqKM2ssGJuY2P",
-                    musique: "https://youtu.be/g8q1k1G5OiM?si=Op-ogZcOOrNNCaJ2"
+                    musique: "https://youtu.be/g8q1k1G5OiM?si=Op-ogZcOOrNNCaJ2",
+                    specials: ["👑 Choix Du Créateur"]
                 },
                 {
                     nom: "Oh love",
@@ -439,7 +506,8 @@
                 {
                     nom: "Where I Belong",
                     danseLigne: "https://youtu.be/pX_AM-fLfS0?si=02O_-8nUSm-2v-fd",
-                    musique: "https://youtu.be/pJcR0A0Ezik?si=bZpUb8RwnZT-IiuW"
+                    musique: "https://youtu.be/pJcR0A0Ezik?si=bZpUb8RwnZT-IiuW",
+                    specials: ["Choix 1 de l'équipe"]
                 },
                 {
                     nom: "Burn It to the Ground",
@@ -454,7 +522,8 @@
                 {
                     nom: "Soldier",
                     danseLigne: "https://youtu.be/KX7FropHUcg?si=60U9PgBNd2u99LVZ",
-                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV"
+                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV",
+                    specials: ["👑 Choix de la Co-Créatrice", "Choix 2 de l'équipe"]
                 }
             ],
             "Autre": [
@@ -467,6 +536,11 @@
                     nom: "Kingdom of Fear",
                     danseLigne: "https://youtu.be/TbD6LEvJla8?si=4vuHjPbM9fiCcd-9",
                     musique: "https://youtu.be/63k0kNuCPak?si=ACG19r8boOrogO5q"
+                },
+                {
+                    nom: "Off The Chain",
+                    danseLigne: "https://youtu.be/K7YV-K1kYr8?si=oxvtjn3jEwAeTJe3",
+                    musique: "https://youtu.be/-WDcpwZqYlU?si=OIlnzCE9VV3AnnG_"
                 }
             ]
         };
@@ -526,13 +600,27 @@
             }
 
             liste.forEach(danse => {
+                const conteneur = document.createElement('div');
+                conteneur.className = 'conteneur-element-danse';
+
+                if (danse.specials) {
+                    danse.specials.forEach(texteSpecial => {
+                        const badge = document.createElement('div');
+                        badge.className = 'badge-createur';
+                        badge.innerText = texteSpecial;
+                        conteneur.appendChild(badge);
+                    });
+                }
+
                 const btn = document.createElement('button');
                 btn.className = 'btn-danse';
                 btn.innerText = danse.nom;
                 btn.addEventListener('click', function() {
                     selectionnerDanse(danse);
                 });
-                grille.appendChild(btn);
+                
+                conteneur.appendChild(btn);
+                grille.appendChild(conteneur);
             });
         }
 
@@ -553,5 +641,18 @@
         }
     </script>
 
+    <!-- Script anti-cache automatique (mis à jour en v9) -->
+    <script>
+        (function() {
+            const versionActuelle = "2026-10-20-v9";
+            const stockVersion = localStorage.getItem("site_version");
+            if (stockVersion !== versionActuelle) {
+                localStorage.setItem("site_version", versionActuelle);
+                if (stockVersion !== null) {
+                    window.location.reload(true);
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
