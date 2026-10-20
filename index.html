@@ -641,16 +641,13 @@
         }
     </script>
 
-    <!-- Script anti-cache automatique (mis à jour en v9) -->
+    <!-- Système anti-cache radical basé sur l'URL -->
     <script>
         (function() {
-            const versionActuelle = "2026-10-20-v9";
-            const stockVersion = localStorage.getItem("site_version");
-            if (stockVersion !== versionActuelle) {
-                localStorage.setItem("site_version", versionActuelle);
-                if (stockVersion !== null) {
-                    window.location.reload(true);
-                }
+            const versionActuelle = "v10";
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("v") !== versionActuelle) {
+                window.location.replace(window.location.pathname + "?v=" + versionActuelle);
             }
         })();
     </script>
