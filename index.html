@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Site Country - Recueil</title>
+    <title>Site Country - Spécial Halloween</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,8 +16,8 @@
             margin: 0;
             padding: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fcf8f2;
-            color: #4a3319;
+            background-color: #120f18; /* Fond sombre mystique */
+            color: #f3f4f6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -35,7 +35,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.08;
+            opacity: 0.12;
             font-size: 1.8rem;
             display: flex;
             flex-wrap: wrap;
@@ -44,20 +44,20 @@
             overflow: hidden;
         }
 
-        /* Bande défilante en haut */
+        /* Bande défilante en haut (style Halloween orange et noir) */
         .bande-defilante {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #d97706;
-            color: white;
+            background-color: #ea580c; /* Orange citrouille */
+            color: #120f18;
             font-weight: bold;
             padding: 8px 0;
             overflow: hidden;
             white-space: nowrap;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(234, 88, 12, 0.4);
         }
         .bande-defilante span {
             display: inline-block;
@@ -75,27 +75,28 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 22, 37, 0.95);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid #d4a373;
+            box-shadow: 0 8px 24px rgba(234, 88, 12, 0.2);
+            border: 2px solid #ea580c;
             margin-top: 30px;
         }
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            color: #b05721;
+            color: #f97316;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
         }
         .bulle-sous-titre {
             font-size: 1.1rem;
             margin-bottom: 30px;
-            color: #5c4033;
-            background: rgba(212, 163, 115, 0.2);
+            color: #d1d5db;
+            background: rgba(234, 88, 12, 0.15);
             padding: 15px;
             border-radius: 8px;
-            border-left: 4px solid #b05721;
+            border-left: 4px solid #ea580c;
         }
         .btn-groupe-accueil {
             display: flex;
@@ -105,8 +106,8 @@
             width: 100%;
         }
         .btn-commencer, .btn-credits-ouvrir {
-            background-color: #d97706;
-            color: white;
+            background-color: #ea580c;
+            color: #fff;
             padding: 14px 35px;
             font-size: 1.1rem;
             font-weight: bold;
@@ -115,10 +116,11 @@
             cursor: pointer;
             width: 100%;
             max-width: 250px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+            transition: background-color 0.2s;
         }
         .btn-commencer:active, .btn-credits-ouvrir:active {
-            background-color: #b45309;
+            background-color: #c2410c;
             transform: scale(0.98);
         }
 
@@ -130,25 +132,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
             z-index: 10;
             padding: 15px;
         }
         .credits-contenu {
-            background: #fff;
+            background: #1a1625;
             padding: 30px;
             border-radius: 12px;
             max-width: 500px;
             width: 100%;
-            border: 2px solid #d4a373;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            color: #4a3319;
+            border: 2px solid #ea580c;
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.3);
+            color: #f3f4f6;
             text-align: left;
         }
         .credits-contenu h3 {
-            color: #b05721;
+            color: #f97316;
             margin-top: 0;
             text-align: center;
             text-transform: uppercase;
@@ -156,15 +158,16 @@
         .credits-contenu p {
             margin: 10px 0;
             line-height: 1.5;
+            color: #d1d5db;
         }
         .credits-contenu a {
-            color: #d97706;
+            color: #fb923c;
             word-break: break-all;
         }
         .btn-fermer-credits {
             display: block;
             margin: 20px auto 0 auto;
-            background-color: #d97706;
+            background-color: #ea580c;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -183,10 +186,11 @@
             margin-top: 30px;
         }
         #section-niveaux h2 {
-            color: #b05721;
+            color: #f97316;
             margin-bottom: 30px;
             font-size: 1.8rem;
             text-transform: uppercase;
+            text-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
         }
         .menu-niveaux {
             display: flex;
@@ -194,18 +198,18 @@
             gap: 15px;
         }
         .btn-niveau {
-            background-color: #fff;
-            color: #4a3319;
-            border: 2px solid #d4a373;
+            background-color: #1a1625;
+            color: #f3f4f6;
+            border: 2px solid #ea580c;
             padding: 15px 25px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
         .btn-niveau:active {
-            background-color: #d97706;
+            background-color: #ea580c;
             color: white;
         }
 
@@ -218,7 +222,7 @@
             margin-top: 30px;
         }
         #section-danses h2 {
-            color: #b05721;
+            color: #f97316;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 30px;
@@ -237,7 +241,7 @@
             width: 100%;
         }
         .badge-createur {
-            background-color: #d97706;
+            background-color: #ea580c;
             color: white;
             font-size: 0.8rem;
             font-weight: bold;
@@ -246,32 +250,32 @@
             margin-bottom: -2px;
             display: inline-block;
             align-self: center;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
             text-align: center;
         }
         .btn-danse {
-            background-color: #fff;
-            color: #4a3319;
-            border: 2px solid #d4a373;
+            background-color: #1a1625;
+            color: #f3f4f6;
+            border: 2px solid #ea580c;
             padding: 15px 20px;
             font-size: 1rem;
             font-weight: bold;
             text-align: center;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             width: 100%;
         }
         .btn-danse:active {
-            background-color: #d97706;
+            background-color: #ea580c;
             color: white;
         }
         .btn-retour-niveaux {
             display: inline-block;
             margin-top: 30px;
             background-color: transparent;
-            color: #b05721;
-            border: 2px solid #b05721;
+            color: #fb923c;
+            border: 2px solid #ea580c;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -285,14 +289,14 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 22, 37, 0.95);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid #d4a373;
+            box-shadow: 0 8px 24px rgba(234, 88, 12, 0.2);
+            border: 2px solid #ea580c;
             margin-top: 30px;
         }
         #titre-danse-selectionnee {
-            color: #b05721;
+            color: #f97316;
             margin-bottom: 30px;
             font-size: 1.8rem;
             text-transform: uppercase;
@@ -303,28 +307,28 @@
             gap: 15px;
         }
         .btn-option-danse {
-            background-color: #fff;
-            color: #4a3319;
-            border: 2px solid #d4a373;
+            background-color: #1a1625;
+            color: #f3f4f6;
+            border: 2px solid #ea580c;
             padding: 15px 25px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             text-decoration: none;
             display: block;
         }
         .btn-option-danse:active {
-            background-color: #d97706;
+            background-color: #ea580c;
             color: white;
         }
         .btn-retour-danses {
             display: inline-block;
             margin-top: 25px;
             background-color: transparent;
-            color: #b05721;
-            border: 2px solid #b05721;
+            color: #fb923c;
+            border: 2px solid #ea580c;
             padding: 8px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -336,20 +340,20 @@
 
     <!-- Bande défilante orange en haut -->
     <div class="bande-defilante">
-        <span>EN COLLABORATION AVEC SARAH</span>
+        <span>🎃 SPÉCIAL HALLOWEEN — EN COLLABORATION AVEC SARAH 👻</span>
     </div>
 
     <div class="pattern-bg">
-        👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 
-        🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 
-        🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 
+        🎃 👻 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 
+        🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 🎃 👻 
+        💀 🎃 👻 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 
     </div>
 
     <!-- 1. Écran d'accueil -->
     <div id="section-accueil">
-        <h1>Bienvenue</h1>
+        <h1>Halloween Country</h1>
         <div class="bulle-sous-titre">
-            Bienvenue dans le recueil de danse country
+            Bienvenue dans le recueil de danse country (Édition Halloween)
         </div>
         <div class="btn-groupe-accueil">
             <button class="btn-commencer" id="btn-commencer">Commencer</button>
@@ -450,6 +454,16 @@
                     musique: "https://youtu.be/22cPDBuhYYg?si=4LPPsf5b7SzTFeAA"
                 },
                 {
+                    nom: "Ziggy",
+                    danseLigne: "https://youtu.be/S5LPfCiq7-4?si=m6_0EZua7HDKzZy7",
+                    musique: "https://youtu.be/FIRyO0dMniE?si=9l7Xu6YH7XILdTQo"
+                },
+                {
+                    nom: "Alligator Smile",
+                    danseLigne: "https://youtu.be/soYbRh8xkKs?si=QS_kxCtof3m20nSH",
+                    musique: "https://youtu.be/NiLNed5DrzI?si=xsssMsZwdfaGesRl"
+                },
+                {
                     nom: "Burn It to the Ground",
                     danseLigne: "https://youtu.be/CZWPs9BnJIw?si=Yy-e99mAxXPTKZ86",
                     musique: "https://youtu.be/gUxH1zN0yOc?si=2lf1f0Y2fjtyLnR6"
@@ -518,12 +532,6 @@
                     nom: "Footloose",
                     danseLigne: "https://youtu.be/miZJe008SuI?si=Hce79ePsnWhJJE6p",
                     musique: "https://youtu.be/FDMHZFJnk2s?si=Uc7N21pzbWoP98CW"
-                },
-                {
-                    nom: "Soldier",
-                    danseLigne: "https://youtu.be/KX7FropHUcg?si=60U9PgBNd2u99LVZ",
-                    musique: "https://youtu.be/Ok2AQKRMPmM?si=VP-ch1Cpsr0zBACV",
-                    specials: ["👑 Choix de la Co-Créatrice", "Choix 2 de l'équipe"]
                 }
             ],
             "Autre": [
@@ -595,7 +603,7 @@
 
             const liste = dansesData[niveau];
             if (!liste || liste.length === 0) {
-                grille.innerHTML = '<p style="grid-column: 1 / -1; color: #78350f; font-weight: bold;">Aucune danse disponible pour l\'instant.</p>';
+                grille.innerHTML = '<p style="grid-column: 1 / -1; color: #fb923c; font-weight: bold;">Aucune danse disponible pour l\'instant.</p>';
                 return;
             }
 
@@ -641,10 +649,10 @@
         }
     </script>
 
-    <!-- Système anti-cache radical basé sur l'URL -->
+    <!-- Système anti-cache automatique (v16) -->
     <script>
         (function() {
-            const versionActuelle = "v10";
+            const versionActuelle = "v16";
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get("v") !== versionActuelle) {
                 window.location.replace(window.location.pathname + "?v=" + versionActuelle);
