@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Site Country - Spécial Halloween</title>
+    <title>Site Country - Recueil</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,8 +16,8 @@
             margin: 0;
             padding: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #120f18; /* Fond sombre mystique */
-            color: #f3f4f6;
+            background-color: var(--bg-color, #fcf8f2);
+            color: var(--text-color, #4a3319);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,6 +25,7 @@
             align-items: center;
             position: relative;
             overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .pattern-bg {
@@ -35,7 +36,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.12;
+            opacity: 0.08;
             font-size: 1.8rem;
             display: flex;
             flex-wrap: wrap;
@@ -44,20 +45,20 @@
             overflow: hidden;
         }
 
-        /* Bande défilante en haut (style Halloween orange et noir) */
+        /* Bande défilante en haut */
         .bande-defilante {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ea580c; /* Orange citrouille */
-            color: #120f18;
+            background-color: var(--primary-color, #d97706);
+            color: white;
             font-weight: bold;
             padding: 8px 0;
             overflow: hidden;
             white-space: nowrap;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(234, 88, 12, 0.4);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .bande-defilante span {
             display: inline-block;
@@ -75,28 +76,27 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: rgba(26, 22, 37, 0.95);
+            background: var(--card-bg, rgba(255, 255, 255, 0.95));
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(234, 88, 12, 0.2);
-            border: 2px solid #ea580c;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid var(--border-color, #d4a373);
             margin-top: 30px;
         }
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            color: #f97316;
+            color: var(--title-color, #b05721);
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
         }
         .bulle-sous-titre {
             font-size: 1.1rem;
             margin-bottom: 30px;
-            color: #d1d5db;
-            background: rgba(234, 88, 12, 0.15);
+            color: var(--subtitle-color, #5c4033);
+            background: var(--subtitle-bg, rgba(212, 163, 115, 0.2));
             padding: 15px;
             border-radius: 8px;
-            border-left: 4px solid #ea580c;
+            border-left: 4px solid var(--title-color, #b05721);
         }
         .btn-groupe-accueil {
             display: flex;
@@ -105,9 +105,9 @@
             align-items: center;
             width: 100%;
         }
-        .btn-commencer, .btn-credits-ouvrir {
-            background-color: #ea580c;
-            color: #fff;
+        .btn-commencer, .btn-credits-ouvrir, .btn-connexion-admin {
+            background-color: var(--primary-color, #d97706);
+            color: white;
             padding: 14px 35px;
             font-size: 1.1rem;
             font-weight: bold;
@@ -116,11 +116,13 @@
             cursor: pointer;
             width: 100%;
             max-width: 250px;
-            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
-            transition: background-color 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .btn-commencer:active, .btn-credits-ouvrir:active {
-            background-color: #c2410c;
+        .btn-connexion-admin {
+            background-color: #78350f; /* Couleur spécifique pour l'admin dans le menu */
+        }
+        .btn-commencer:active, .btn-credits-ouvrir:active, .btn-connexion-admin:active {
+            filter: brightness(0.9);
             transform: scale(0.98);
         }
 
@@ -132,25 +134,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
             z-index: 10;
             padding: 15px;
         }
         .credits-contenu {
-            background: #1a1625;
+            background: var(--card-bg, #fff);
             padding: 30px;
             border-radius: 12px;
             max-width: 500px;
             width: 100%;
-            border: 2px solid #ea580c;
-            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.3);
-            color: #f3f4f6;
+            border: 2px solid var(--border-color, #d4a373);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            color: var(--text-color, #4a3319);
             text-align: left;
         }
         .credits-contenu h3 {
-            color: #f97316;
+            color: var(--title-color, #b05721);
             margin-top: 0;
             text-align: center;
             text-transform: uppercase;
@@ -158,22 +160,158 @@
         .credits-contenu p {
             margin: 10px 0;
             line-height: 1.5;
-            color: #d1d5db;
         }
         .credits-contenu a {
-            color: #fb923c;
+            color: var(--primary-color, #d97706);
             word-break: break-all;
         }
         .btn-fermer-credits {
             display: block;
             margin: 20px auto 0 auto;
-            background-color: #ea580c;
+            background-color: var(--primary-color, #d97706);
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
+        }
+
+        /* --- MODAL CONNEXION ADMIN --- */
+        #modal-admin-choix, #modal-admin-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            padding: 15px;
+        }
+        .admin-contenu {
+            background: var(--card-bg, #fff);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+            border: 2px solid var(--border-color, #d4a373);
+            text-align: center;
+            color: var(--text-color, #4a3319);
+        }
+        .admin-contenu h3 {
+            color: var(--title-color, #b05721);
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+        .admin-btn-groupe {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .btn-admin-role {
+            background-color: var(--primary-color, #d97706);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .admin-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid var(--border-color, #d4a373);
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* --- ÉCRAN MENU ADMIN (RECUEIL) --- */
+        #section-recueil-admin {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid var(--border-color, #d4a373);
+            margin-top: 30px;
+        }
+        #section-recueil-admin h2 {
+            color: var(--title-color, #b05721);
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        .admin-recueil-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* --- ÉCRAN LISTE DANSES ADMIN --- */
+        #section-liste-danses-admin {
+            display: none;
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            padding: 30px;
+            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid var(--border-color, #d4a373);
+            margin-top: 30px;
+        }
+        #section-liste-danses-admin h2 {
+            color: var(--title-color, #b05721);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .liste-recueil-admin {
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+            background: var(--bg-color, #fcf8f2);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color, #d4a373);
+            margin-bottom: 20px;
+        }
+        .element-recueil-admin {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color, #e7d8c9);
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .element-recueil-admin span:last-child {
+            color: var(--title-color, #b05721);
+        }
+
+        /* --- ÉCRAN GESTION THÈMES ADMIN --- */
+        #section-themes-admin {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid var(--border-color, #d4a373);
+            margin-top: 30px;
+        }
+        #section-themes-admin h2 {
+            color: var(--title-color, #b05721);
+            text-transform: uppercase;
+            margin-bottom: 25px;
         }
 
         /* --- ÉCRAN CHOIX DES NIVEAUX --- */
@@ -186,11 +324,10 @@
             margin-top: 30px;
         }
         #section-niveaux h2 {
-            color: #f97316;
+            color: var(--title-color, #b05721);
             margin-bottom: 30px;
             font-size: 1.8rem;
             text-transform: uppercase;
-            text-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
         }
         .menu-niveaux {
             display: flex;
@@ -198,18 +335,18 @@
             gap: 15px;
         }
         .btn-niveau {
-            background-color: #1a1625;
-            color: #f3f4f6;
-            border: 2px solid #ea580c;
+            background-color: var(--card-bg, #fff);
+            color: var(--text-color, #4a3319);
+            border: 2px solid var(--border-color, #d4a373);
             padding: 15px 25px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         .btn-niveau:active {
-            background-color: #ea580c;
+            background-color: var(--primary-color, #d97706);
             color: white;
         }
 
@@ -222,7 +359,7 @@
             margin-top: 30px;
         }
         #section-danses h2 {
-            color: #f97316;
+            color: var(--title-color, #b05721);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 30px;
@@ -241,7 +378,7 @@
             width: 100%;
         }
         .badge-createur {
-            background-color: #ea580c;
+            background-color: var(--primary-color, #d97706);
             color: white;
             font-size: 0.8rem;
             font-weight: bold;
@@ -250,32 +387,32 @@
             margin-bottom: -2px;
             display: inline-block;
             align-self: center;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
             text-align: center;
         }
         .btn-danse {
-            background-color: #1a1625;
-            color: #f3f4f6;
-            border: 2px solid #ea580c;
+            background-color: var(--card-bg, #fff);
+            color: var(--text-color, #4a3319);
+            border: 2px solid var(--border-color, #d4a373);
             padding: 15px 20px;
             font-size: 1rem;
             font-weight: bold;
             text-align: center;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             width: 100%;
         }
         .btn-danse:active {
-            background-color: #ea580c;
+            background-color: var(--primary-color, #d97706);
             color: white;
         }
         .btn-retour-niveaux {
             display: inline-block;
             margin-top: 30px;
             background-color: transparent;
-            color: #fb923c;
-            border: 2px solid #ea580c;
+            color: var(--title-color, #b05721);
+            border: 2px solid var(--title-color, #b05721);
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -289,14 +426,14 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: rgba(26, 22, 37, 0.95);
+            background: var(--card-bg, rgba(255, 255, 255, 0.95));
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(234, 88, 12, 0.2);
-            border: 2px solid #ea580c;
+            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
+            border: 2px solid var(--border-color, #d4a373);
             margin-top: 30px;
         }
         #titre-danse-selectionnee {
-            color: #f97316;
+            color: var(--title-color, #b05721);
             margin-bottom: 30px;
             font-size: 1.8rem;
             text-transform: uppercase;
@@ -307,28 +444,28 @@
             gap: 15px;
         }
         .btn-option-danse {
-            background-color: #1a1625;
-            color: #f3f4f6;
-            border: 2px solid #ea580c;
+            background-color: var(--card-bg, #fff);
+            color: var(--text-color, #4a3319);
+            border: 2px solid var(--border-color, #d4a373);
             padding: 15px 25px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             text-decoration: none;
             display: block;
         }
         .btn-option-danse:active {
-            background-color: #ea580c;
+            background-color: var(--primary-color, #d97706);
             color: white;
         }
         .btn-retour-danses {
             display: inline-block;
             margin-top: 25px;
             background-color: transparent;
-            color: #fb923c;
-            border: 2px solid #ea580c;
+            color: var(--title-color, #b05721);
+            border: 2px solid var(--title-color, #b05721);
             padding: 8px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -340,24 +477,25 @@
 
     <!-- Bande défilante orange en haut -->
     <div class="bande-defilante">
-        <span>🎃 SPÉCIAL HALLOWEEN — EN COLLABORATION AVEC SARAH 👻</span>
+        <span id="texte-bande">EN COLLABORATION AVEC SARAH</span>
     </div>
 
-    <div class="pattern-bg">
-        🎃 👻 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 
-        🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 🎃 👻 
-        💀 🎃 👻 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 
+    <div class="pattern-bg" id="pattern-bg">
+        👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 
+        🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 
+        🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 
     </div>
 
     <!-- 1. Écran d'accueil -->
     <div id="section-accueil">
-        <h1>Halloween Country</h1>
+        <h1 id="titre-accueil">Bienvenue</h1>
         <div class="bulle-sous-titre">
-            Bienvenue dans le recueil de danse country (Édition Halloween)
+            Bienvenue dans le recueil de danse country
         </div>
         <div class="btn-groupe-accueil">
             <button class="btn-commencer" id="btn-commencer">Commencer</button>
             <button class="btn-credits-ouvrir" id="btn-credits">Crédits</button>
+            <button class="btn-connexion-admin" id="btn-ouvrir-admin">Connexion Admin</button>
         </div>
     </div>
 
@@ -370,6 +508,32 @@
             <p><strong>Danse en ligne :</strong> Mg Danse Country-pop Mathieu Gagné</p>
             <p><a href="https://youtube.com/@mgdansecountrypop?si=jDQfKF09Tvdv3VmW" target="_blank">Chaîne YouTube</a></p>
             <button class="btn-fermer-credits" id="btn-fermer-credits">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Modal 1 : Choix du rôle Admin -->
+    <div id="modal-admin-choix">
+        <div class="admin-contenu">
+            <h3>Où veux-tu te connecter ?</h3>
+            <div class="admin-btn-groupe">
+                <button class="btn-admin-role" onclick="choisirRole('Créateur')">Créateur</button>
+                <button class="btn-admin-role" onclick="choisirRole('Co-Créatrice')">Co-Créatrice</button>
+            </div>
+            <button class="btn-fermer-credits" onclick="fermerAdminChoix()" style="margin-top: 15px;">Annuler</button>
+        </div>
+    </div>
+
+    <!-- Modal 2 : Formulaire NIP et Code -->
+    <div id="modal-admin-form">
+        <div class="admin-contenu">
+            <h3 id="titre-role-admin">Connexion</h3>
+            <p style="font-size: 0.9rem; color: #78350f;">Entre ton code utilisateur et ton NIP (5 chiffres)</p>
+            <input type="text" id="input-code" class="admin-input" placeholder="Code utilisateur">
+            <input type="password" id="input-nip" class="admin-input" placeholder="NIP (5 chiffres)" maxlength="5">
+            <div class="admin-btn-groupe">
+                <button class="btn-admin-role" onclick="verifierAdmin()">Se connecter</button>
+                <button class="btn-fermer-credits" onclick="retourAdminChoix()">Retour</button>
+            </div>
         </div>
     </div>
 
@@ -405,6 +569,39 @@
         </div>
         <div>
             <button class="btn-retour-danses" id="btn-retour-danses">&larr; Retour aux danses</button>
+        </div>
+    </div>
+
+    <!-- 5. Menu Principal Recueil (Admin) avec les 2 boutons -->
+    <div id="section-recueil-admin">
+        <h2>Menu Admin - Recueil</h2>
+        <div class="admin-recueil-options">
+            <button class="btn-admin-role" id="btn-menu-danse-presente">Danse présente</button>
+            <button class="btn-admin-role" id="btn-menu-themes">Thème</button>
+        </div>
+        <div>
+            <button class="btn-retour-niveaux" id="btn-retour-admin-menu" style="margin-top: 25px;">&larr; Retour à l'accueil</button>
+        </div>
+    </div>
+
+    <!-- 6. Sous-section : Danse présente (Liste globale avec niveaux) -->
+    <div id="section-liste-danses-admin">
+        <h2>Danse présente</h2>
+        <div class="liste-recueil-admin" id="liste-globale-admin"></div>
+        <div>
+            <button class="btn-retour-niveaux" id="btn-retour-menu-recueil">&larr; Retour au menu Recueil</button>
+        </div>
+    </div>
+
+    <!-- 7. Sous-section : Thème (Normal / Halloween) -->
+    <div id="section-themes-admin">
+        <h2>Gestion des Thèmes</h2>
+        <div class="admin-recueil-options">
+            <button class="btn-admin-role" onclick="changerTheme('normal')">Normal (Par défaut)</button>
+            <button class="btn-admin-role" onclick="changerTheme('halloween')" style="background-color: #ea580c;">Halloween 🎃</button>
+        </div>
+        <div>
+            <button class="btn-retour-niveaux" id="btn-retour-menu-recueil-2" style="margin-top: 25px;">&larr; Retour au menu Recueil</button>
         </div>
     </div>
 
@@ -553,6 +750,13 @@
             ]
         };
 
+        let roleSelectionne = "";
+        let estConnecteAdmin = false;
+        const admins = {
+            "Créateur": { code: "31456", nip: "2510" },
+            "Co-Créatrice": { code: "6161", nip: "6151" }
+        };
+
         document.getElementById('btn-commencer').addEventListener('click', function() {
             document.getElementById('section-accueil').style.display = 'none';
             document.getElementById('section-niveaux').style.display = 'block';
@@ -565,6 +769,134 @@
 
         document.getElementById('btn-fermer-credits').addEventListener('click', function() {
             document.getElementById('modal-credits').style.display = 'none';
+        });
+
+        document.getElementById('btn-ouvrir-admin').addEventListener('click', function() {
+            if (estConnecteAdmin) {
+                ouvrirMenuRecueilAdmin();
+            } else {
+                document.getElementById('modal-admin-choix').style.display = 'flex';
+            }
+        });
+
+        function fermerAdminChoix() {
+            document.getElementById('modal-admin-choix').style.display = 'none';
+        }
+
+        function choisirRole(role) {
+            roleSelectionne = role;
+            document.getElementById('titre-role-admin').innerText = "Connexion : " + role;
+            document.getElementById('modal-admin-choix').style.display = 'none';
+            document.getElementById('modal-admin-form').style.display = 'flex';
+            document.getElementById('input-code').value = '';
+            document.getElementById('input-nip').value = '';
+        }
+
+        function retourAdminChoix() {
+            document.getElementById('modal-admin-form').style.display = 'none';
+            document.getElementById('modal-admin-choix').style.display = 'flex';
+        }
+
+        function verifierAdmin() {
+            const saisieCode = document.getElementById('input-code').value.trim();
+            const saisieNip = document.getElementById('input-nip').value.trim();
+            const adminAttendu = admins[roleSelectionne];
+
+            if (saisieCode === adminAttendu.code && saisieNip === adminAttendu.nip) {
+                alert("Connexion réussie en tant que " + roleSelectionne + " !");
+                estConnecteAdmin = true;
+                document.getElementById('modal-admin-form').style.display = 'none';
+                document.getElementById('btn-ouvrir-admin').innerText = "RECUEIL (Admin)";
+                ouvrirMenuRecueilAdmin();
+            } else {
+                alert("Code utilisateur ou NIP incorrect !");
+            }
+        }
+
+        function ouvrirMenuRecueilAdmin() {
+            document.getElementById('section-accueil').style.display = 'none';
+            document.getElementById('section-recueil-admin').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        }
+
+        // Clic sur "Danse présente"
+        document.getElementById('btn-menu-danse-presente').addEventListener('click', function() {
+            document.getElementById('section-recueil-admin').style.display = 'none';
+            document.getElementById('section-liste-danses-admin').style.display = 'block';
+            document.body.style.justifyContent = 'flex-start';
+
+            const listeDiv = document.getElementById('liste-globale-admin');
+            listeDiv.innerHTML = '';
+
+            for (const [niveau, danses] of Object.entries(dansesData)) {
+                danses.forEach(danse => {
+                    const item = document.createElement('div');
+                    item.className = 'element-recueil-admin';
+                    item.innerHTML = `<span>🎵 ${danse.nom}</span><span>[${niveau}]</span>`;
+                    listeDiv.appendChild(item);
+                });
+            }
+        });
+
+        // Clic sur "Thème"
+        document.getElementById('btn-menu-themes').addEventListener('click', function() {
+            document.getElementById('section-recueil-admin').style.display = 'none';
+            document.getElementById('section-themes-admin').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        });
+
+        // Fonction pour changer le thème du site
+        function changerTheme(theme) {
+            const root = document.documentElement;
+            const patternBg = document.getElementById('pattern-bg');
+            const texteBande = document.getElementById('texte-bande');
+            const titreAccueil = document.getElementById('titre-accueil');
+
+            if (theme === 'halloween') {
+                root.style.setProperty('--bg-color', '#120f18');
+                root.style.setProperty('--text-color', '#f3f4f6');
+                root.style.setProperty('--primary-color', '#ea580c');
+                root.style.setProperty('--card-bg', 'rgba(26, 22, 37, 0.95)');
+                root.style.setProperty('--border-color', '#ea580c');
+                root.style.setProperty('--title-color', '#f97316');
+                root.style.setProperty('--subtitle-color', '#d1d5db');
+                root.style.setProperty('--subtitle-bg', 'rgba(234, 88, 12, 0.15)');
+                patternBg.innerHTML = '🎃 👻 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 <br> 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 🎃 👻';
+                texteBande.innerText = '🎃 SPÉCIAL HALLOWEEN — EN COLLABORATION AVEC SARAH 👻';
+                titreAccueil.innerText = 'Halloween Country';
+            } else {
+                root.style.setProperty('--bg-color', '#fcf8f2');
+                root.style.setProperty('--text-color', '#4a3319');
+                root.style.setProperty('--primary-color', '#d97706');
+                root.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.95)');
+                root.style.setProperty('--border-color', '#d4a373');
+                root.style.setProperty('--title-color', '#b05721');
+                root.style.setProperty('--subtitle-color', '#5c4033');
+                root.style.setProperty('--subtitle-bg', 'rgba(212, 163, 115, 0.2)');
+                patternBg.innerHTML = '👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟<br>🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢<br>🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠';
+                texteBande.innerText = 'EN COLLABORATION AVEC SARAH';
+                titreAccueil.innerText = 'Bienvenue';
+            }
+            alert("Thème appliqué avec succès !");
+        }
+
+        // Boutons de retour
+        document.getElementById('btn-retour-admin-menu').addEventListener('click', function() {
+            document.getElementById('section-recueil-admin').style.display = 'none';
+            document.getElementById('section-accueil').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        });
+
+        document.getElementById('btn-retour-menu-recueil').addEventListener('click', function() {
+            document.getElementById('section-liste-danses-admin').style.display = 'none';
+            document.getElementById('section-recueil-admin').style.display = 'block';
+            document.body.style.justifyContent = 'center';
+        });
+
+        document.getElementById('btn-retour-menu-recueil-2').addEventListener('click', function() {
+            document.getElementById('section-themes-admin').style.display = 'none';
+            document.getElementById('section-recueil-admin').style.display = 'block';
+            document.body.style.justifyContent = 'center';
         });
 
         document.getElementById('btn-retour-accueil').addEventListener('click', function() {
@@ -603,7 +935,7 @@
 
             const liste = dansesData[niveau];
             if (!liste || liste.length === 0) {
-                grille.innerHTML = '<p style="grid-column: 1 / -1; color: #fb923c; font-weight: bold;">Aucune danse disponible pour l\'instant.</p>';
+                grille.innerHTML = '<p style="grid-column: 1 / -1; font-weight: bold;">Aucune danse disponible pour l\'instant.</p>';
                 return;
             }
 
@@ -632,12 +964,6 @@
             });
         }
 
-        function retourNiveaux() {
-            document.getElementById('section-danses').style.display = 'none';
-            document.getElementById('section-niveaux').style.display = 'block';
-            document.body.style.justifyContent = 'center';
-        }
-
         function selectionnerDanse(danseObj) {
             document.getElementById('titre-danse-selectionnee').innerText = danseObj.nom;
             document.getElementById('lien-danse-ligne').href = danseObj.danseLigne;
@@ -649,10 +975,10 @@
         }
     </script>
 
-    <!-- Système anti-cache automatique (v16) -->
+    <!-- Système anti-cache automatique (v22) -->
     <script>
         (function() {
-            const versionActuelle = "v16";
+            const versionActuelle = "v22";
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get("v") !== versionActuelle) {
                 window.location.replace(window.location.pathname + "?v=" + versionActuelle);
