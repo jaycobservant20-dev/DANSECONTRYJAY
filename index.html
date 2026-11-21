@@ -6,8 +6,22 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Site Country - Recueil🤠</title>
+    <title>Site Country - Recueil de Noël 🎄🤠</title>
     <style>
+        :root {
+            --bg-color: #0f2419;
+            --text-color: #f8fafc;
+            --primary-color: #c81e1e;
+            --secondary-color: #d4af37;
+            --card-bg: rgba(20, 43, 31, 0.96);
+            --border-color: #d4af37;
+            --title-color: #ffd166;
+            --subtitle-color: #fef3c7;
+            --subtitle-bg: rgba(200, 30, 30, 0.28);
+            --list-bg: #163324;
+            --item-border: #2c553f;
+        }
+
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -16,8 +30,8 @@
             margin: 0;
             padding: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color, #fcf8f2);
-            color: var(--text-color, #4a3319);
+            background: radial-gradient(circle at top, #1b3f2c 0%, var(--bg-color) 70%);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,7 +50,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.08;
+            opacity: 0.14;
             font-size: 1.8rem;
             display: flex;
             flex-wrap: wrap;
@@ -45,20 +59,21 @@
             overflow: hidden;
         }
 
-        /* Bande défilante en haut */
+        /* Bande défilante de Noël en haut */
         .bande-defilante {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: var(--primary-color, #d97706);
-            color: white;
+            background: linear-gradient(90deg, #b91c1c, #dc2626, #b91c1c);
+            color: #fffbeb;
             font-weight: bold;
             padding: 8px 0;
             overflow: hidden;
             white-space: nowrap;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border-bottom: 2px solid var(--secondary-color);
         }
         .bande-defilante span {
             display: inline-block;
@@ -76,27 +91,27 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid var(--border-color, #d4a373);
-            margin-top: 30px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+            border: 2px solid var(--border-color);
+            margin-top: 35px;
         }
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 10px;
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         .bulle-sous-titre {
             font-size: 1.1rem;
             margin-bottom: 30px;
-            color: var(--subtitle-color, #5c4033);
-            background: var(--subtitle-bg, rgba(212, 163, 115, 0.2));
+            color: var(--subtitle-color);
+            background: var(--subtitle-bg);
             padding: 15px;
             border-radius: 8px;
-            border-left: 4px solid var(--title-color, #b05721);
+            border-left: 4px solid var(--primary-color);
         }
         .btn-groupe-accueil {
             display: flex;
@@ -106,20 +121,20 @@
             width: 100%;
         }
         .btn-commencer, .btn-credits-ouvrir, .btn-connexion-admin {
-            background-color: var(--primary-color, #d97706);
-            color: white;
+            background-color: var(--primary-color);
+            color: #ffffff;
             padding: 14px 35px;
             font-size: 1.1rem;
             font-weight: bold;
-            border: none;
+            border: 2px solid var(--secondary-color);
             border-radius: 30px;
             cursor: pointer;
             width: 100%;
-            max-width: 250px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
         .btn-connexion-admin {
-            background-color: #78350f; /* Couleur spécifique pour l'admin dans le menu */
+            background-color: #15803d;
         }
         .btn-commencer:active, .btn-credits-ouvrir:active, .btn-connexion-admin:active {
             filter: brightness(0.9);
@@ -134,25 +149,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.65);
             justify-content: center;
             align-items: center;
             z-index: 10;
             padding: 15px;
         }
         .credits-contenu {
-            background: var(--card-bg, #fff);
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 12px;
             max-width: 500px;
             width: 100%;
-            border: 2px solid var(--border-color, #d4a373);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            color: var(--text-color, #4a3319);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            color: var(--text-color);
             text-align: left;
         }
         .credits-contenu h3 {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             margin-top: 0;
             text-align: center;
             text-transform: uppercase;
@@ -162,15 +177,15 @@
             line-height: 1.5;
         }
         .credits-contenu a {
-            color: var(--primary-color, #d97706);
+            color: var(--title-color);
             word-break: break-all;
         }
         .btn-fermer-credits {
             display: block;
             margin: 20px auto 0 auto;
-            background-color: var(--primary-color, #d97706);
+            background-color: var(--primary-color);
             color: white;
-            border: none;
+            border: 1px solid var(--secondary-color);
             padding: 10px 20px;
             border-radius: 20px;
             cursor: pointer;
@@ -185,24 +200,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
             z-index: 20;
             padding: 15px;
         }
         .admin-contenu {
-            background: var(--card-bg, #fff);
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 12px;
             max-width: 400px;
             width: 100%;
-            border: 2px solid var(--border-color, #d4a373);
+            border: 2px solid var(--border-color);
             text-align: center;
-            color: var(--text-color, #4a3319);
+            color: var(--text-color);
         }
         .admin-contenu h3 {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             margin-top: 0;
             text-transform: uppercase;
         }
@@ -213,9 +228,9 @@
             margin-top: 20px;
         }
         .btn-admin-role {
-            background-color: var(--primary-color, #d97706);
+            background-color: var(--primary-color);
             color: white;
-            border: none;
+            border: 2px solid var(--secondary-color);
             padding: 12px;
             border-radius: 8px;
             font-weight: bold;
@@ -226,10 +241,12 @@
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border: 2px solid var(--border-color, #d4a373);
+            border: 2px solid var(--border-color);
             border-radius: 6px;
             font-size: 1rem;
             text-align: center;
+            background: #0b1b13;
+            color: #ffffff;
         }
 
         /* --- ÉCRAN MENU ADMIN (RECUEIL) --- */
@@ -239,14 +256,14 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid var(--border-color, #d4a373);
-            margin-top: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            border: 2px solid var(--border-color);
+            margin-top: 35px;
         }
         #section-recueil-admin h2 {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             text-transform: uppercase;
             margin-bottom: 25px;
         }
@@ -263,14 +280,14 @@
             max-width: 700px;
             width: 100%;
             padding: 30px;
-            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid var(--border-color, #d4a373);
-            margin-top: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            border: 2px solid var(--border-color);
+            margin-top: 35px;
         }
         #section-liste-danses-admin h2 {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             text-transform: uppercase;
             margin-bottom: 20px;
         }
@@ -278,40 +295,21 @@
             text-align: left;
             max-height: 400px;
             overflow-y: auto;
-            background: var(--bg-color, #fcf8f2);
+            background: var(--list-bg);
             padding: 15px;
             border-radius: 8px;
-            border: 1px solid var(--border-color, #d4a373);
+            border: 1px solid var(--border-color);
             margin-bottom: 20px;
         }
         .element-recueil-admin {
             padding: 8px 0;
-            border-bottom: 1px solid var(--border-color, #e7d8c9);
+            border-bottom: 1px solid var(--item-border);
             display: flex;
             justify-content: space-between;
             font-weight: bold;
         }
         .element-recueil-admin span:last-child {
-            color: var(--title-color, #b05721);
-        }
-
-        /* --- ÉCRAN GESTION THÈMES ADMIN --- */
-        #section-themes-admin {
-            display: none;
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-            padding: 40px;
-            background: var(--card-bg, rgba(255, 255, 255, 0.95));
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid var(--border-color, #d4a373);
-            margin-top: 30px;
-        }
-        #section-themes-admin h2 {
-            color: var(--title-color, #b05721);
-            text-transform: uppercase;
-            margin-bottom: 25px;
+            color: var(--title-color);
         }
 
         /* --- ÉCRAN CHOIX DES NIVEAUX --- */
@@ -321,10 +319,10 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            margin-top: 30px;
+            margin-top: 35px;
         }
         #section-niveaux h2 {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             margin-bottom: 30px;
             font-size: 1.8rem;
             text-transform: uppercase;
@@ -335,18 +333,18 @@
             gap: 15px;
         }
         .btn-niveau {
-            background-color: var(--card-bg, #fff);
-            color: var(--text-color, #4a3319);
-            border: 2px solid var(--border-color, #d4a373);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
             padding: 15px 25px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
         }
         .btn-niveau:active {
-            background-color: var(--primary-color, #d97706);
+            background-color: var(--primary-color);
             color: white;
         }
 
@@ -356,10 +354,10 @@
             width: 100%;
             max-width: 1000px;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 35px;
         }
         #section-danses h2 {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 30px;
@@ -378,8 +376,9 @@
             width: 100%;
         }
         .badge-createur {
-            background-color: var(--primary-color, #d97706);
+            background-color: var(--primary-color);
             color: white;
+            border: 1px solid var(--secondary-color);
             font-size: 0.8rem;
             font-weight: bold;
             padding: 5px 10px;
@@ -387,32 +386,32 @@
             margin-bottom: -2px;
             display: inline-block;
             align-self: center;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
             text-align: center;
         }
         .btn-danse {
-            background-color: var(--card-bg, #fff);
-            color: var(--text-color, #4a3319);
-            border: 2px solid var(--border-color, #d4a373);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
             padding: 15px 20px;
             font-size: 1rem;
             font-weight: bold;
             text-align: center;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
             width: 100%;
         }
         .btn-danse:active {
-            background-color: var(--primary-color, #d97706);
+            background-color: var(--primary-color);
             color: white;
         }
         .btn-retour-niveaux {
             display: inline-block;
             margin-top: 30px;
             background-color: transparent;
-            color: var(--title-color, #b05721);
-            border: 2px solid var(--title-color, #b05721);
+            color: var(--title-color);
+            border: 2px solid var(--title-color);
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -426,14 +425,14 @@
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            background: var(--card-bg, rgba(255, 255, 255, 0.95));
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(74, 51, 25, 0.15);
-            border: 2px solid var(--border-color, #d4a373);
-            margin-top: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            border: 2px solid var(--border-color);
+            margin-top: 35px;
         }
         #titre-danse-selectionnee {
-            color: var(--title-color, #b05721);
+            color: var(--title-color);
             margin-bottom: 30px;
             font-size: 1.8rem;
             text-transform: uppercase;
@@ -444,28 +443,59 @@
             gap: 15px;
         }
         .btn-option-danse {
-            background-color: var(--card-bg, #fff);
-            color: var(--text-color, #4a3319);
-            border: 2px solid var(--border-color, #d4a373);
+            background-color: var(--list-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
             padding: 15px 25px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
             text-decoration: none;
             display: block;
         }
         .btn-option-danse:active {
-            background-color: var(--primary-color, #d97706);
+            background-color: var(--primary-color);
             color: white;
+        }
+        .lecteur-video-interne {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: var(--list-bg);
+            border: 2px solid var(--border-color);
+        }
+        .lecteur-video-interne video {
+            width: 100%;
+            max-height: 450px;
+            border-radius: 8px;
+            background: #000;
+            border: none;
+        }
+        .note-fichier-video {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--subtitle-color);
+        }
+        .btn-fermer-lecteur {
+            margin-top: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: 1px solid var(--secondary-color);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
         }
         .btn-retour-danses {
             display: inline-block;
             margin-top: 25px;
             background-color: transparent;
-            color: var(--title-color, #b05721);
-            border: 2px solid var(--title-color, #b05721);
+            color: var(--title-color);
+            border: 2px solid var(--title-color);
             padding: 8px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -475,22 +505,22 @@
 </head>
 <body>
 
-    <!-- Bande défilante orange en haut -->
+    <!-- Bande défilante de Noël en haut -->
     <div class="bande-defilante">
-        <span id="texte-bande">EN COLLABORATION AVEC SARAH</span>
+        <span id="texte-bande">🎄 JOYEUX NOËL COUNTRY — EN COLLABORATION AVEC SARAH 🎅</span>
     </div>
 
     <div class="pattern-bg" id="pattern-bg">
-        👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 
-        🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 
-        🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 
+        🎄 🎅 ❄️ 🤠 🎁 🎄 🎅 ❄️ 🤠 🎁
+        ❄️ 🤠 🎁 🎄 🎅 ❄️ 🤠 🎁 🎄 🎅
+        🎁 🎄 🎅 ❄️ 🤠 🎁 🎄 🎅 ❄️ 🤠
     </div>
 
     <!-- 1. Écran d'accueil -->
     <div id="section-accueil">
-        <h1 id="titre-accueil">Bienvenue</h1>
+        <h1 id="titre-accueil">🎄 Bienvenue 🎄</h1>
         <div class="bulle-sous-titre">
-            Bienvenue dans le recueil de danse country
+            Bienvenue dans le recueil de danse country — Édition de Noël ❄️🤠
         </div>
         <div class="btn-groupe-accueil">
             <button class="btn-commencer" id="btn-commencer">Commencer</button>
@@ -527,7 +557,7 @@
     <div id="modal-admin-form">
         <div class="admin-contenu">
             <h3 id="titre-role-admin">Connexion</h3>
-            <p style="font-size: 0.9rem; color: #78350f;">Entre ton code utilisateur et ton NIP (4à5 chiffres)</p>
+            <p style="font-size: 0.9rem; color: var(--subtitle-color);">Entre ton code utilisateur et ton NIP (4 à 5 chiffres)</p>
             <input type="text" id="input-code" class="admin-input" placeholder="Code utilisateur">
             <input type="password" id="input-nip" class="admin-input" placeholder="NIP (5 chiffres)" maxlength="5">
             <div class="admin-btn-groupe">
@@ -539,7 +569,7 @@
 
     <!-- 2. Écran de choix du niveau -->
     <div id="section-niveaux">
-        <h2>Choisis ton niveau</h2>
+        <h2>Choisis ton niveau ❄️</h2>
         <div class="menu-niveaux">
             <button class="btn-niveau" data-niveau="Novice">Novice</button>
             <button class="btn-niveau" data-niveau="Débutant">Débutant</button>
@@ -553,7 +583,7 @@
 
     <!-- 3. Écran avec la liste des danses -->
     <div id="section-danses">
-        <h2>VOILÀ LES DANSES COUNTRY DISPONIBLES POUR L'INSTANT</h2>
+        <h2>VOILÀ LES DANSES COUNTRY DISPONIBLES POUR L'INSTANT 🎄</h2>
         <div class="grid-danses" id="grille-liste-danses"></div>
         <div>
             <button class="btn-retour-niveaux" id="btn-retour-niveaux">&larr; Changer de niveau</button>
@@ -567,17 +597,23 @@
             <a id="lien-danse-ligne" href="#" target="_blank" class="btn-option-danse">DANSE EN LIGNE</a>
             <a id="lien-musique" href="#" target="_blank" class="btn-option-danse">MUSIQUE</a>
         </div>
+        <div id="lecteur-video-interne" class="lecteur-video-interne">
+            <video id="video-danse-interne" controls playsinline preload="metadata"></video>
+            <p id="note-fichier-video" class="note-fichier-video">
+                Place le fichier <strong>1000020761.mp4</strong> dans le même dossier que ce fichier HTML pour lire la vidéo ici.
+            </p>
+            <button type="button" class="btn-fermer-lecteur" id="btn-fermer-lecteur">Masquer la vidéo</button>
+        </div>
         <div>
             <button class="btn-retour-danses" id="btn-retour-danses">&larr; Retour aux danses</button>
         </div>
     </div>
 
-    <!-- 5. Menu Principal Recueil (Admin) avec les 2 boutons -->
+    <!-- 5. Menu Principal Recueil (Admin) avec uniquement "Danse présente" -->
     <div id="section-recueil-admin">
         <h2>Menu Admin - Recueil</h2>
         <div class="admin-recueil-options">
             <button class="btn-admin-role" id="btn-menu-danse-presente">Danse présente</button>
-            <button class="btn-admin-role" id="btn-menu-themes">Thème</button>
         </div>
         <div>
             <button class="btn-retour-niveaux" id="btn-retour-admin-menu" style="margin-top: 25px;">&larr; Retour à l'accueil</button>
@@ -590,18 +626,6 @@
         <div class="liste-recueil-admin" id="liste-globale-admin"></div>
         <div>
             <button class="btn-retour-niveaux" id="btn-retour-menu-recueil">&larr; Retour au menu Recueil</button>
-        </div>
-    </div>
-
-    <!-- 7. Sous-section : Thème (Normal / Halloween) -->
-    <div id="section-themes-admin">
-        <h2>Gestion des Thèmes</h2>
-        <div class="admin-recueil-options">
-            <button class="btn-admin-role" onclick="changerTheme('normal')">Normal (Par défaut)</button>
-            <button class="btn-admin-role" onclick="changerTheme('halloween')" style="background-color: #ea580c;">Halloween 🎃</button>
-        </div>
-        <div>
-            <button class="btn-retour-niveaux" id="btn-retour-menu-recueil-2" style="margin-top: 25px;">&larr; Retour au menu Recueil</button>
         </div>
     </div>
 
@@ -622,6 +646,16 @@
                     nom: "Hit The 4",
                     danseLigne: "https://youtu.be/Z5NeurNFT-s?si=cIrHVu4umKYOE7sQ",
                     musique: "https://youtu.be/tXVaLWR2M8k?si=F8boJ_qCaR4pi1sM"
+                },
+                {
+                    nom: "Lonely Drum",
+                    danseLigne: "https://youtu.be/YouuffzbJsM?si=8pgmtE0UsPYZk_6S",
+                    musique: "https://youtu.be/DwDriYeZa2g?si=SZLV57PplwpyAuAT"
+                },
+                {
+                    nom: "Green Green Glass",
+                    danseLigne: "https://youtu.be/q4Iv3ef_VEI?si=7aj0sxjFVHYFOhKc",
+                    musique: "https://youtu.be/VQeW62X8rEA?si=W56XCsLCzC0uobgh"
                 }
             ],
             "Débutant": [
@@ -690,6 +724,17 @@
                     nom: "Good Time",
                     danseLigne: "https://youtu.be/KePwvAXTomg?si=_1p7mIIyv0DBSBIb",
                     musique: "https://youtu.be/OYKmqErgHq8?si=jOHZ8EWUH3gqupWi"
+                },
+                {
+                    nom: "Turn This Town",
+                    danseLigne: "https://youtu.be/2YkI1_2bscA?si=BEPtlYEyYdVOPJpn",
+                    musique: "https://youtu.be/dZ83sL7zyv8?si=R-jEf64lnpw50Aa4"
+                },
+                {
+                    nom: "Jingle Bell Rock",
+                    danseLigne: "#",
+                    musique: "https://youtu.be/6Cot10ipI54?si=LSAaY2ll9-VIgitY",
+                    isNonDisponible: true
                 }
             ],
             "Intermédiaire": [
@@ -729,6 +774,11 @@
                     nom: "Footloose",
                     danseLigne: "https://youtu.be/miZJe008SuI?si=Hce79ePsnWhJJE6p",
                     musique: "https://youtu.be/FDMHZFJnk2s?si=Uc7N21pzbWoP98CW"
+                },
+                {
+                    nom: "Turn Me Loose",
+                    danseLigne: "https://youtu.be/4j_Fto7qlgo?si=I-3NX0_R0CUvhfqM",
+                    musique: "https://youtu.be/gkeG4uPG-Lo?si=Y_EQRpdbIj9j6ClE"
                 }
             ],
             "Autre": [
@@ -746,6 +796,12 @@
                     nom: "Off The Chain",
                     danseLigne: "https://youtu.be/K7YV-K1kYr8?si=oxvtjn3jEwAeTJe3",
                     musique: "https://youtu.be/-WDcpwZqYlU?si=OIlnzCE9VV3AnnG_"
+                },
+                {
+                    nom: "Mercy",
+                    videoInterne: "1000020761.mp4",
+                    danseLigne: "https://youtu.be/H9ImvxudQtg?si=k1pUVsdmFA8GwQ8o",
+                    musique: "https://youtu.be/H9ImvxudQtg?si=pI0VmdmFA8GwQ8o"
                 }
             ]
         };
@@ -756,6 +812,12 @@
             "Créateur": { code: "31456", nip: "2510" },
             "Co-Créatrice": { code: "6161", nip: "6151" }
         };
+
+        const lecteurVideo = document.getElementById('video-danse-interne');
+        const noteFichierVideo = document.getElementById('note-fichier-video');
+        lecteurVideo.addEventListener('error', function() {
+            noteFichierVideo.style.display = 'block';
+        });
 
         document.getElementById('btn-commencer').addEventListener('click', function() {
             document.getElementById('section-accueil').style.display = 'none';
@@ -838,47 +900,14 @@
             }
         });
 
-        // Clic sur "Thème"
-        document.getElementById('btn-menu-themes').addEventListener('click', function() {
-            document.getElementById('section-recueil-admin').style.display = 'none';
-            document.getElementById('section-themes-admin').style.display = 'block';
-            document.body.style.justifyContent = 'center';
-        });
-
-        // Fonction pour changer le thème du site
-        function changerTheme(theme) {
-            const root = document.documentElement;
-            const patternBg = document.getElementById('pattern-bg');
-            const texteBande = document.getElementById('texte-bande');
-            const titreAccueil = document.getElementById('titre-accueil');
-
-            if (theme === 'halloween') {
-                root.style.setProperty('--bg-color', '#120f18');
-                root.style.setProperty('--text-color', '#f3f4f6');
-                root.style.setProperty('--primary-color', '#ea580c');
-                root.style.setProperty('--card-bg', 'rgba(26, 22, 37, 0.95)');
-                root.style.setProperty('--border-color', '#ea580c');
-                root.style.setProperty('--title-color', '#f97316');
-                root.style.setProperty('--subtitle-color', '#d1d5db');
-                root.style.setProperty('--subtitle-bg', 'rgba(234, 88, 12, 0.15)');
-                patternBg.innerHTML = '🎃 👻 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 <br> 🦇 🕷️ 💀 🎃 👻 🦇 🕷️ 💀 🎃 👻';
-                texteBande.innerText = '🎃 SPÉCIAL HALLOWEEN — EN COLLABORATION AVEC SARAH 👻';
-                titreAccueil.innerText = 'Halloween Country';
-            } else {
-                root.style.setProperty('--bg-color', '#fcf8f2');
-                root.style.setProperty('--text-color', '#4a3319');
-                root.style.setProperty('--primary-color', '#d97706');
-                root.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.95)');
-                root.style.setProperty('--border-color', '#d4a373');
-                root.style.setProperty('--title-color', '#b05721');
-                root.style.setProperty('--subtitle-color', '#5c4033');
-                root.style.setProperty('--subtitle-bg', 'rgba(212, 163, 115, 0.2)');
-                patternBg.innerHTML = '👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟<br>🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢<br>🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠 🌟 👢 🤠';
-                texteBande.innerText = 'EN COLLABORATION AVEC SARAH';
-                titreAccueil.innerText = 'Bienvenue';
-            }
-            alert("Thème appliqué avec succès !");
+        function arreterEtCacherVideoInterne() {
+            const conteneurVideo = document.getElementById('lecteur-video-interne');
+            lecteurVideo.pause();
+            noteFichierVideo.style.display = 'none';
+            conteneurVideo.style.display = 'none';
         }
+
+        document.getElementById('btn-fermer-lecteur').addEventListener('click', arreterEtCacherVideoInterne);
 
         // Boutons de retour
         document.getElementById('btn-retour-admin-menu').addEventListener('click', function() {
@@ -889,12 +918,6 @@
 
         document.getElementById('btn-retour-menu-recueil').addEventListener('click', function() {
             document.getElementById('section-liste-danses-admin').style.display = 'none';
-            document.getElementById('section-recueil-admin').style.display = 'block';
-            document.body.style.justifyContent = 'center';
-        });
-
-        document.getElementById('btn-retour-menu-recueil-2').addEventListener('click', function() {
-            document.getElementById('section-themes-admin').style.display = 'none';
             document.getElementById('section-recueil-admin').style.display = 'block';
             document.body.style.justifyContent = 'center';
         });
@@ -912,6 +935,7 @@
         });
 
         document.getElementById('btn-retour-danses').addEventListener('click', function() {
+            arreterEtCacherVideoInterne();
             document.getElementById('section-detail-danse').style.display = 'none';
             document.getElementById('section-danses').style.display = 'block';
             document.body.style.justifyContent = 'flex-start';
@@ -965,9 +989,48 @@
         }
 
         function selectionnerDanse(danseObj) {
+            arreterEtCacherVideoInterne();
             document.getElementById('titre-danse-selectionnee').innerText = danseObj.nom;
-            document.getElementById('lien-danse-ligne').href = danseObj.danseLigne;
-            document.getElementById('lien-musique').href = danseObj.musique;
+            
+            const lienDanseLigne = document.getElementById('lien-danse-ligne');
+            const lienMusique = document.getElementById('lien-musique');
+
+            lienDanseLigne.onclick = null;
+
+            if (danseObj.isNonDisponible) {
+                lienDanseLigne.innerText = "NON DISPONIBLE POUR LE MOMENT !";
+                lienDanseLigne.href = "#";
+                lienDanseLigne.removeAttribute("target");
+                lienDanseLigne.style.pointerEvents = "none";
+                lienDanseLigne.style.backgroundColor = "#374151";
+                lienDanseLigne.style.color = "#9ca3af";
+            } else if (danseObj.videoInterne) {
+                lienDanseLigne.innerText = "DANSE EN LIGNE";
+                lienDanseLigne.href = "#lecteur-video-interne";
+                lienDanseLigne.removeAttribute("target");
+                lienDanseLigne.style.pointerEvents = "auto";
+                lienDanseLigne.style.backgroundColor = "";
+                lienDanseLigne.style.color = "";
+                lienDanseLigne.onclick = function(e) {
+                    e.preventDefault();
+                    const conteneurVideo = document.getElementById('lecteur-video-interne');
+                    noteFichierVideo.style.display = 'none';
+                    if (lecteurVideo.getAttribute('src') !== danseObj.videoInterne) {
+                        lecteurVideo.setAttribute('src', danseObj.videoInterne);
+                    }
+                    conteneurVideo.style.display = 'block';
+                    lecteurVideo.play().catch(function() {});
+                };
+            } else {
+                lienDanseLigne.innerText = "DANSE EN LIGNE";
+                lienDanseLigne.href = danseObj.danseLigne;
+                lienDanseLigne.setAttribute("target", "_blank");
+                lienDanseLigne.style.pointerEvents = "auto";
+                lienDanseLigne.style.backgroundColor = "";
+                lienDanseLigne.style.color = "";
+            }
+
+            lienMusique.href = danseObj.musique;
 
             document.getElementById('section-danses').style.display = 'none';
             document.getElementById('section-detail-danse').style.display = 'block';
@@ -975,10 +1038,10 @@
         }
     </script>
 
-    <!-- Système anti-cache automatique (v22) -->
+    <!-- Système anti-cache automatique (v34) -->
     <script>
         (function() {
-            const versionActuelle = "v22";
+            const versionActuelle = "v34";
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get("v") !== versionActuelle) {
                 window.location.replace(window.location.pathname + "?v=" + versionActuelle);
