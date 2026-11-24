@@ -59,6 +59,46 @@
             overflow: hidden;
         }
 
+        /* Fond animé avec le nom d'utilisateur de l'invité */
+        .invite-bg-anime {
+            display: none;
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.14;
+        }
+        .invite-bg-piste {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            transform: rotate(-18deg) scale(1.25);
+        }
+        .invite-bg-ligne {
+            white-space: nowrap;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 14px;
+            color: var(--title-color);
+            text-transform: uppercase;
+            animation: glisserInvite 22s linear infinite;
+        }
+        .invite-bg-ligne:nth-child(even) {
+            animation-direction: reverse;
+            animation-duration: 28s;
+        }
+        @keyframes glisserInvite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        body > *:not(.bande-defilante):not(.invite-bg-anime) {
+            position: relative;
+            z-index: 2;
+        }
+
         /* Bande défilante de Noël en haut */
         .bande-defilante {
             position: fixed;
@@ -141,6 +181,18 @@
             transform: scale(0.98);
         }
 
+        .bandeau-invite-actif {
+            display: none;
+            margin-bottom: 18px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: rgba(212, 175, 55, 0.16);
+            border: 1px solid var(--secondary-color);
+            color: var(--title-color);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
         /* --- MODAL CRÉDITS --- */
         #modal-credits {
             display: none;
@@ -192,8 +244,8 @@
             font-weight: bold;
         }
 
-        /* --- MODAL CONNEXION ADMIN --- */
-        #modal-admin-choix, #modal-admin-form {
+        /* --- MODAL CONNEXION ADMIN & INVITÉ --- */
+        #modal-admin-choix, #modal-admin-form, #modal-invite-form {
             display: none;
             position: fixed;
             top: 0;
@@ -236,6 +288,17 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 1rem;
+        }
+        .btn-admin-invite {
+            background-color: #163324;
+            color: var(--title-color);
+            border: 2px solid var(--secondary-color);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.92rem;
+            line-height: 1.35;
         }
         .admin-input {
             width: 100%;
@@ -510,6 +573,11 @@
         <span id="texte-bande">🎄 JOYEUX NOËL COUNTRY — EN COLLABORATION AVEC SARAH 🎅</span>
     </div>
 
+    <!-- Fond animé avec le nom d'utilisateur de l'invité connecté -->
+    <div class="invite-bg-anime" id="invite-bg-anime" aria-hidden="true">
+        <div class="invite-bg-piste" id="invite-bg-piste"></div>
+    </div>
+
     <div class="pattern-bg" id="pattern-bg">
         🎄 🎅 ❄️ 🤠 🎁 🎄 🎅 ❄️ 🤠 🎁
         ❄️ 🤠 🎁 🎄 🎅 ❄️ 🤠 🎁 🎄 🎅
@@ -519,6 +587,7 @@
     <!-- 1. Écran d'accueil -->
     <div id="section-accueil">
         <h1 id="titre-accueil">🎄 Bienvenue 🎄</h1>
+        <div id="bandeau-invite-actif" class="bandeau-invite-actif"></div>
         <div class="bulle-sous-titre">
             Bienvenue dans le recueil de danse country — Édition de Noël ❄️🤠
         </div>
@@ -541,19 +610,22 @@
         </div>
     </div>
 
-    <!-- Modal 1 : Choix du rôle Admin -->
+    <!-- Modal 1 : Choix du rôle Admin / Invité -->
     <div id="modal-admin-choix">
         <div class="admin-contenu">
             <h3>Quel rôle te correspond t'il?</h3>
             <div class="admin-btn-groupe">
                 <button class="btn-admin-role" onclick="choisirRole('Créateur')">Créateur</button>
                 <button class="btn-admin-role" onclick="choisirRole('Co-Créatrice')">Co-Créatrice</button>
+                <button class="btn-admin-invite" id="btn-ouvrir-invite">
+                    Si tu as été invité par un co-créateur ou co-créatrice, appuie ici.
+                </button>
             </div>
             <button class="btn-fermer-credits" onclick="fermerAdminChoix()" style="margin-top: 15px;">Annuler</button>
         </div>
     </div>
 
-    <!-- Modal 2 : Formulaire NIP et Code -->
+    <!-- Modal 2 : Formulaire NIP et Code Admin -->
     <div id="modal-admin-form">
         <div class="admin-contenu">
             <h3 id="titre-role-admin">Connexion</h3>
@@ -563,6 +635,20 @@
             <div class="admin-btn-groupe">
                 <button class="btn-admin-role" onclick="verifierAdmin()">Se connecter</button>
                 <button class="btn-fermer-credits" onclick="retourAdminChoix()">Retour</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Invité -->
+    <div id="modal-invite-form">
+        <div class="admin-contenu">
+            <h3>Invité</h3>
+            <p style="font-size: 0.9rem; color: var(--subtitle-color);">Entre ton nom d'utilisateur et ton mot de passe</p>
+            <input type="text" id="input-invite-user" class="admin-input" placeholder="Nom d'utilisateur">
+            <input type="password" id="input-invite-pass" class="admin-input" placeholder="Mot de passe">
+            <div class="admin-btn-groupe">
+                <button class="btn-admin-role" id="btn-valider-invite">Se connecter</button>
+                <button class="btn-fermer-credits" id="btn-fermer-invite">Retour</button>
             </div>
         </div>
     </div>
@@ -731,6 +817,11 @@
                     musique: "https://youtu.be/dZ83sL7zyv8?si=R-jEf64lnpw50Aa4"
                 },
                 {
+                    nom: "Nothing but you",
+                    danseLigne: "https://youtu.be/rqHURTevEpw?si=lVYAn6YvqikLv6Ri",
+                    musique: "https://youtu.be/KX-Py4m806M?si=UeplT4Hpu83gFsvt"
+                },
+                {
                     nom: "Jingle Bell Rock",
                     danseLigne: "#",
                     musique: "https://youtu.be/6Cot10ipI54?si=LSAaY2ll9-VIgitY",
@@ -779,6 +870,11 @@
                     nom: "Turn Me Loose",
                     danseLigne: "https://youtu.be/4j_Fto7qlgo?si=I-3NX0_R0CUvhfqM",
                     musique: "https://youtu.be/gkeG4uPG-Lo?si=Y_EQRpdbIj9j6ClE"
+                },
+                {
+                    nom: "Crank It up",
+                    danseLigne: "https://youtu.be/DMuk8x70kU4?si=ZI_5OPfCu1-vkMLb",
+                    musique: "https://youtu.be/2N319dgV7mY?si=UD4ckLMm4k63xOKb"
                 }
             ],
             "Autre": [
@@ -808,15 +904,72 @@
 
         let roleSelectionne = "";
         let estConnecteAdmin = false;
+        let inviteConnecte = null;
+
         const admins = {
             "Créateur": { code: "31456", nip: "2510" },
             "Co-Créatrice": { code: "6161", nip: "6151" }
+        };
+
+        const inviteCompte = {
+            utilisateur: "Jayke P",
+            motDePasse: "JApoulininvitejaycob"
         };
 
         const lecteurVideo = document.getElementById('video-danse-interne');
         const noteFichierVideo = document.getElementById('note-fichier-video');
         lecteurVideo.addEventListener('error', function() {
             noteFichierVideo.style.display = 'block';
+        });
+
+        function activerFondInvite(nomUtilisateur) {
+            const bgInvite = document.getElementById('invite-bg-anime');
+            const piste = document.getElementById('invite-bg-piste');
+            const motif = `${nomUtilisateur} • ${nomUtilisateur} • ${nomUtilisateur} • ${nomUtilisateur} • `;
+            const ligneTexte = motif.repeat(8);
+            piste.innerHTML = '';
+
+            for (let i = 0; i < 9; i++) {
+                const divLigne = document.createElement('div');
+                divLigne.className = 'invite-bg-ligne';
+                divLigne.textContent = ligneTexte;
+                piste.appendChild(divLigne);
+            }
+
+            bgInvite.style.display = 'block';
+
+            const bandeau = document.getElementById('bandeau-invite-actif');
+            bandeau.textContent = `🎟️ Mode Invité actif : ${nomUtilisateur}`;
+            bandeau.style.display = 'block';
+        }
+
+        document.getElementById('btn-ouvrir-invite').addEventListener('click', function() {
+            document.getElementById('modal-admin-choix').style.display = 'none';
+            document.getElementById('input-invite-user').value = '';
+            document.getElementById('input-invite-pass').value = '';
+            document.getElementById('modal-invite-form').style.display = 'flex';
+            document.getElementById('input-invite-user').focus();
+        });
+
+        document.getElementById('btn-fermer-invite').addEventListener('click', function() {
+            document.getElementById('modal-invite-form').style.display = 'none';
+            document.getElementById('modal-admin-choix').style.display = 'flex';
+        });
+
+        document.getElementById('btn-valider-invite').addEventListener('click', function() {
+            const user = document.getElementById('input-invite-user').value.trim();
+            const pass = document.getElementById('input-invite-pass').value.trim();
+
+            if (user === inviteCompte.utilisateur && pass === inviteCompte.motDePasse) {
+                inviteConnecte = user;
+                document.getElementById('modal-invite-form').style.display = 'none';
+                activerFondInvite(user);
+                document.getElementById('section-accueil').style.display = 'none';
+                document.getElementById('section-niveaux').style.display = 'block';
+                document.body.style.justifyContent = 'center';
+            } else {
+                alert("Nom d'utilisateur ou mot de passe invité incorrect !");
+            }
         });
 
         document.getElementById('btn-commencer').addEventListener('click', function() {
@@ -1038,10 +1191,10 @@
         }
     </script>
 
-    <!-- Système anti-cache automatique (v34) -->
+    <!-- Système anti-cache automatique (v39) -->
     <script>
         (function() {
-            const versionActuelle = "v34";
+            const versionActuelle = "v39";
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get("v") !== versionActuelle) {
                 window.location.replace(window.location.pathname + "?v=" + versionActuelle);
